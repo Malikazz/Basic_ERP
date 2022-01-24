@@ -4,6 +4,7 @@ backports.zoneinfo==0.2.1
 black==21.12b0
 click==8.0.3
 Django==4.0.1
+django-crispy-forms==1.13.0
 django-environ==0.8.1
 isort==5.10.1
 lazy-object-proxy==1.7.1
