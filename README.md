@@ -21,7 +21,7 @@ easy to use.
 
 After installing docker desktop you should run this script to pull a postgres server
 
-`docker run --name BAIS3900 -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_USER=chubbybuffalo -e POSTGRES_DB=ChubbyBuffalo -d postgres`
+`docker run --name BAIS3900 -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_USER=erp_user -e POSTGRES_DB=ERP -d postgres`
 
 After pulling the project from Gitlabs you need to create a `venv` to do this on windows
 run `python -m venv venv` in the root of the project. this will create a folder called
