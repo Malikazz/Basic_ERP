@@ -1,0 +1,56 @@
+[
+  {
+    "model": "django.contrib.auth.models.User",
+    "pk": 1,
+    "fields": {
+      "first_name": "Perry",
+      "last_name": "Platypus",
+      "email": "PerryP@test.com",
+      "is_staff": true,
+      "username": "PerryP",
+      "is_superuser": true
+    },
+    "model": "django.contrib.auth.models.User",
+    "pk": 2,
+    "fields": {
+      "first_name": "Phineas",
+      "last_name": "Flynn",
+      "email": "PhineasF@test.com",
+      "is_staff": true,
+      "username": "PhineasF"
+    },
+    "model": "django.contrib.auth.models.User",
+    "pk": 3,
+    "fields": {
+      "first_name": "Ferb",
+      "last_name": "Fletcher",
+      "email": "FerbF@test.com",
+      "is_staff": true,
+      "username": "FerbF"
+    },
+    "model": "django.contrib.auth.models.User",
+    "pk": 4,
+    "fields": {
+      "first_name": "Heinz",
+      "last_name": "Doofenshmirtz",
+      "email": "HeinzD@test.com",
+      "username": "HeinzD"
+    },
+    "model": "django.contrib.auth.models.User",
+    "pk": 5,
+    "fields": {
+      "first_name": "Candace",
+      "last_name": "Fylnn",
+      "email": "CandiceF@test.com",
+      "username": "CandiceF"
+    },
+    "model": "django.contrib.auth.models.User",
+    "pk": 6,
+    "fields": {
+      "first_name": "Baljeet",
+      "last_name": "Tjinder",
+      "email": "BaljeetT@test.com",
+      "username": "BaljeetT"
+    }
+  }
+]
