@@ -51,6 +51,14 @@
       "last_name": "Tjinder",
       "email": "BaljeetT@test.com",
       "username": "BaljeetT"
+    },
+    "model": "django.contrib.auth.models.User",
+    "pk": 6,
+    "fields": {
+      "first_name": "Baljeet",
+      "last_name": "Tjinder",
+      "email": "BaljeetT@test.com",
+      "username": "BaljeetT"
     }
   }
 ]
