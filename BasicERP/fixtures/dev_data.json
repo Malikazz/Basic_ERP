@@ -1,5 +1,47 @@
 [
   {
+    "model": "django.contrib.auth.models.Group",
+    "pk": 1,
+    "fields": {
+      "name": "Managing Director"
+    }
+  },
+  {
+    "model": "django.contrib.auth.models.Group",
+    "pk": 2,
+    "fields": {
+      "name": "Inventory Manager"
+    }
+  },
+  {
+    "model": "django.contrib.auth.models.Group",
+    "pk": 3,
+    "fields": {
+      "name": "Production Manager"
+    }
+  },
+  {
+    "model": "django.contrib.auth.models.Group",
+    "pk": 4,
+    "fields": {
+      "name": "Sales"
+    }
+  },
+  {
+    "model": "django.contrib.auth.models.Group",
+    "pk": 5,
+    "fields": {
+      "name": "Production Staff"
+    }
+  },
+  {
+    "model": "django.contrib.auth.models.Group",
+    "pk": 6,
+    "fields": {
+      "name": "Designer"
+    }
+  },
+  {
     "model": "django.contrib.auth.models.User",
     "pk": 1,
     "fields": {
@@ -8,8 +50,13 @@
       "email": "PerryP@test.com",
       "is_staff": true,
       "username": "PerryP",
-      "is_superuser": true
-    },
+      "is_superuser": true,
+      "group": [
+        1
+      ]
+    }
+  },
+  {
     "model": "django.contrib.auth.models.User",
     "pk": 2,
     "fields": {
@@ -17,8 +64,13 @@
       "last_name": "Flynn",
       "email": "PhineasF@test.com",
       "is_staff": true,
-      "username": "PhineasF"
-    },
+      "username": "PhineasF",
+      "group": [
+        2
+      ]
+    }
+  },
+  {
     "model": "django.contrib.auth.models.User",
     "pk": 3,
     "fields": {
@@ -26,39 +78,49 @@
       "last_name": "Fletcher",
       "email": "FerbF@test.com",
       "is_staff": true,
-      "username": "FerbF"
-    },
+      "username": "FerbF",
+      "group": [
+        3
+      ]
+    }
+  },
+  {
     "model": "django.contrib.auth.models.User",
     "pk": 4,
     "fields": {
       "first_name": "Heinz",
       "last_name": "Doofenshmirtz",
       "email": "HeinzD@test.com",
-      "username": "HeinzD"
-    },
+      "username": "HeinzD",
+      "group": [
+        4
+      ]
+    }
+  },
+  {
     "model": "django.contrib.auth.models.User",
     "pk": 5,
     "fields": {
       "first_name": "Candace",
       "last_name": "Fylnn",
       "email": "CandiceF@test.com",
-      "username": "CandiceF"
-    },
+      "username": "CandiceF",
+      "group": [
+        5
+      ]
+    }
+  },
+  {
     "model": "django.contrib.auth.models.User",
     "pk": 6,
     "fields": {
       "first_name": "Baljeet",
       "last_name": "Tjinder",
       "email": "BaljeetT@test.com",
-      "username": "BaljeetT"
-    },
-    "model": "django.contrib.auth.models.User",
-    "pk": 6,
-    "fields": {
-      "first_name": "Baljeet",
-      "last_name": "Tjinder",
-      "email": "BaljeetT@test.com",
-      "username": "BaljeetT"
+      "username": "BaljeetT",
+      "group": [
+        6
+      ]
     }
   }
 ]
