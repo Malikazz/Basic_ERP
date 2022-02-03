@@ -37,3 +37,19 @@ Then please install the project requirements using `pip install -r requirements.
 Finally you can enter the project folder containing `manage.py` and run `python manage.py makemigrations` ,
 then `python manage.py migrate` to setup your db. After this your project should run fine using `python manage.py runserver`. 
 
+## Loading Dev Data
+
+- To load manual testing data into the app please run `python manage.py initdata`
+- To add to the data being loaded look at the `BasicERP/fixtures/dev_data.json` file and edit as neeeded.
+
+Be aware using initdata will overrite data by pk but will leave anything its not over writting.
+This may lead to a poor state if you have added data in a means beyond initdata its recomened 
+you wipe the database before running init data. 
+
+Base super user info
+
+username: PerrP
+password: the-pass-word-01
+
+Please check `user/fixtures/dev_data` for full listing of users
+

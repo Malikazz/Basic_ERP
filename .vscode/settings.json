@@ -1,6 +1,7 @@
 {
   // Windows
   //"python.defaultInterpreterPath": "venv/bin/python"
+  //Linux
   "python.defaultInterpreterPath": "venv/bin/python3",
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "venv/bin/black",
