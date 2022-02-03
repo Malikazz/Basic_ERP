@@ -34,6 +34,7 @@ Now you can update the pip repository list and pip its self with `pip install --
 
 Then please install the project requirements using `pip install -r requirements.txt`
 
+
 Finally you can enter the project folder containing `manage.py` and run `python manage.py makemigrations` ,
 then `python manage.py migrate` to setup your db. After this your project should run fine using `python manage.py runserver`. 
 
