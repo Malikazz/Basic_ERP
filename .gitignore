@@ -272,5 +272,15 @@ pip-selfcheck.json
 # Local secrets ignore
 secret/
 # adding this now that the base setup is up to prevent other settings from propergating
-settings.json
 .vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
