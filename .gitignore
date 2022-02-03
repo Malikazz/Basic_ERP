@@ -273,4 +273,4 @@ pip-selfcheck.json
 secret/
 # adding this now that the base setup is up to prevent other settings from propergating
 settings.json
-.vscode/settings.json
+.vscode/*
