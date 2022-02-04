@@ -146,3 +146,7 @@ LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 ## disables the registration page
 REGISTRATION_OPEN = False
+
+## Email;
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
