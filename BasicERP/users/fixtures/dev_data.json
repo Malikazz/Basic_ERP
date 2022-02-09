@@ -186,30 +186,27 @@
     }
   },
   {
-    "model": "dashboard.orderdocument",
+    "model": "dashboard.orderimage",
     "pk": 1,
     "fields": {
       "name": "Some Image",
-      "download_url": "https://via.placeholder.com/150",
-      "drive_id": "ASDF!@#$#%342590asdfa!!#@4fsadf4%$"
+      "image_location": "https://via.placeholder.com/150"
     }
   },
   {
-    "model": "dashboard.orderdocument",
+    "model": "dashboard.orderimage",
     "pk": 2,
     "fields": {
       "name": "Some Image 2",
-      "download_url": "https://via.placeholder.com/150",
-      "drive_id": "ASDF!@#$#%342590asdfa!!#@4fsadf4%$"
+      "image_location": "https://via.placeholder.com/150"
     }
   },
   {
-    "model": "dashboard.orderdocument",
+    "model": "dashboard.orderimage",
     "pk": 3,
     "fields": {
       "name": "Some Image 3",
-      "download_url": "https://via.placeholder.com/150",
-      "drive_id": "ASDF!@#$#%342590asdfa!!#@4fsadf4%$"
+      "image_location": "https://via.placeholder.com/150"
     }
   },
   {
@@ -229,9 +226,9 @@
   },
   {
     "model": "dashboard.order",
-    "pk": 1,
+    "pk": 2,
     "fields": {
-      "order_name": "Test Order 1",
+      "order_name": "Test Order 2",
       "order_tags": [
         2,
         3
