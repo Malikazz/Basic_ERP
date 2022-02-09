@@ -5,7 +5,7 @@ from django.db.models import Q
 
 
 def _get_order_and_related_data(user: User, orders: dict) -> None:
-
+    """Adds any orders and related data found to orders dict uses the `order.id` to prevent duplicate data"""
     order_list = list(
         Order.objects.filter(~Q(order_tags__name="Archive"))
         .prefetch_related("order_documents")
@@ -25,6 +25,7 @@ def _get_order_and_related_data(user: User, orders: dict) -> None:
 
 
 def get_orders_by_user_role(user: User) -> Dict[str, Dict[str, object]]:
+    """Will use the users groups to determine what orders to return, return will include {order, order_documents, order_images, order_tags}"""
     orders = {}
     user_groups = get_all_users_groups(user)
     if "Managing Director" in user_groups:
@@ -44,6 +45,7 @@ def get_orders_by_user_role(user: User) -> Dict[str, Dict[str, object]]:
 
 
 def get_all_users_groups(user: User) -> List:
+    """Returns list of users groups"""
     group_names = []
     groups_list = list(user.groups.all())
     for item in groups_list:
