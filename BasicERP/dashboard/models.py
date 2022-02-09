@@ -32,8 +32,8 @@ class OrderImage(models.Model):
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
     order_tags = models.ManyToManyField(OrderTag)
-    order_documents = models.ManyToManyField(OrderDocument, blank=True, null=True)
-    order_images = models.ManyToManyField(OrderImage, blank=True, null=True)
+    order_documents = models.ManyToManyField(OrderDocument, blank=True)
+    order_images = models.ManyToManyField(OrderImage, blank=True)
 
     def __str__(self):
         return self.order_name
