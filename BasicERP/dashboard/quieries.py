@@ -1,13 +1,14 @@
 from typing import List, Dict
-from .models import Order, OrderDocument, OrderTag, OrderImage
+from .models import Order
 from django.contrib.auth.models import User
 from django.db.models import Q
 
 
 def _get_order_and_related_data(user: User, orders: dict) -> None:
     """Adds any orders and related data found to orders dict uses the `order.id` to prevent duplicate data"""
+    user_groups = _get_all_users_groups(user)
     order_list = list(
-        Order.objects.filter(~Q(order_tags__name="Archive"))
+        Order.objects.filter(Q(order_tags__pk__in=user_groups) & Q(archived=False))
         .prefetch_related("order_documents")
         .prefetch_related("order_images")
         .prefetch_related("order_tags")
@@ -19,35 +20,22 @@ def _get_order_and_related_data(user: User, orders: dict) -> None:
         orders["order_" + str(item.id)] = {
             "order": item,
             "order_documents": order_documents,
-            "order_image": order_images,
+            "order_images": order_images,
             "order_tags": order_tags,
         }
+
+
+def _get_all_users_groups(user: User) -> List:
+    """Returns list of users groups"""
+    group_names = []
+    groups_list = list(user.groups.all())
+    for item in groups_list:
+        group_names.append(item.pk)
+    return group_names
 
 
 def get_orders_by_user_role(user: User) -> Dict[str, Dict[str, object]]:
     """Will use the users groups to determine what orders to return, return will include {order, order_documents, order_images, order_tags}"""
     orders = {}
-    user_groups = get_all_users_groups(user)
-    if "Managing Director" in user_groups:
-        _get_order_and_related_data(user, orders)
-    if "Inventory Manager" in user_groups:
-        _get_order_and_related_data(user, orders)
-    if "Production Manager" in user_groups:
-        _get_order_and_related_data(user, orders)
-    if "Sales" in user_groups:
-        _get_order_and_related_data(user, orders)
-    if "Production Staff" in user_groups:
-        _get_order_and_related_data(user, orders)
-    if "Designer" in user_groups:
-        _get_order_and_related_data(user, orders)
-
+    _get_order_and_related_data(user, orders)
     return orders
-
-
-def get_all_users_groups(user: User) -> List:
-    """Returns list of users groups"""
-    group_names = []
-    groups_list = list(user.groups.all())
-    for item in groups_list:
-        group_names.append(item.name)
-    return group_names

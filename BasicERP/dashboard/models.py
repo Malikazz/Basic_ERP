@@ -1,15 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import Group
 
 # Create your models here.
-
-
-class OrderTag(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    description = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
 
 # TODO: Need to test the one drive api to see how this works
 # https://docs.microsoft.com/en-us/graph/api/resources/onedrive?view=graph-rest-1.0
@@ -31,9 +23,12 @@ class OrderImage(models.Model):
 
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
-    order_tags = models.ManyToManyField(OrderTag)
+    order_tags = models.ManyToManyField(Group)
     order_documents = models.ManyToManyField(OrderDocument, blank=True)
     order_images = models.ManyToManyField(OrderImage, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    archived = models.BooleanField(default=False)
 
     def __str__(self):
         return self.order_name
