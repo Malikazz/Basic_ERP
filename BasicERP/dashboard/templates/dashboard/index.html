@@ -1,9 +1,53 @@
 {% extends "base.html" %}
-
+{% block head %}
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+{% endblock %}
 {% block content %}
 <h1>Dashboard</h1>
+<table id="myTable" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Order Name</th>
+      <th>Order Tags</th>
+      <th>Order Images</th>
+      <th>Order Files</th>
+      <th>Last Updated</th>
+      <th>Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in orders %}
+    <tr>
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td class="d-flex flex-wrap">
+        {% for tag in item.order_tags %}
+        <div class="p-2 m-1 bg-secondary text-light text-center rounded small">{{tag}}</div>
+        {% endfor %}
+      </td>
+      <td>
+        {% for image in item.order_images %}
+        <a href="{{image.image_location}}">{{image.name}}</a>
+        {% endfor %}
+      </td>
+      <td>
+        {% for file in item.order_files %}
+        <a href="{{file.file_location}}">{{file.name}}</a>
+        {% endfor %}
+      </td>
+      <td>{{item.updated_at}}</td>
+      <td>{{item.created_at}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<script>
 
-
-{{json_data}}
+  $(document).ready(function () {
+    $('#myTable').DataTable();
+  });
+</script>
 
 {% endblock %}
