@@ -28,7 +28,7 @@ SECRET_KEY = env("DJANGO_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [env("DEV_ADDRESS")]
+ALLOWED_HOSTS = [env("DEV_ADDRESS"), "localhost"]
 
 
 # Application definition

@@ -134,7 +134,7 @@
     "pk": 1,
     "fields": {
       "name": "Design",
-      "description": "Order is ready for design"
+      "description": "Order is ready for Design"
     }
   },
   {
@@ -218,7 +218,7 @@
         1,
         2
       ],
-      "order_documents": [
+      "order_images": [
         1,
         2
       ]
@@ -233,7 +233,7 @@
         2,
         3
       ],
-      "order_documents": [
+      "order_images": [
         2,
         3
       ]
