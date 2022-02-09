@@ -130,62 +130,6 @@
     }
   },
   {
-    "model": "dashboard.ordertag",
-    "pk": 1,
-    "fields": {
-      "name": "Design",
-      "description": "Order is ready for Design"
-    }
-  },
-  {
-    "model": "dashboard.ordertag",
-    "pk": 2,
-    "fields": {
-      "name": "Sales",
-      "description": "Order is in review"
-    }
-  },
-  {
-    "model": "dashboard.ordertag",
-    "pk": 3,
-    "fields": {
-      "name": "Inventory",
-      "description": "Order is being processed by inventory"
-    }
-  },
-  {
-    "model": "dashboard.ordertag",
-    "pk": 4,
-    "fields": {
-      "name": "Production Review",
-      "description": "Order is in production review"
-    }
-  },
-  {
-    "model": "dashboard.ordertag",
-    "pk": 5,
-    "fields": {
-      "name": "Production",
-      "description": "Order is in production"
-    }
-  },
-  {
-    "model": "dashboard.ordertag",
-    "pk": 6,
-    "fields": {
-      "name": "Final Review",
-      "description": "Order is in final review"
-    }
-  },
-  {
-    "model": "dashboard.ordertag",
-    "pk": 1,
-    "fields": {
-      "name": "Archived",
-      "description": "Order is Archived"
-    }
-  },
-  {
     "model": "dashboard.orderimage",
     "pk": 1,
     "fields": {
@@ -207,36 +151,6 @@
     "fields": {
       "name": "Some Image 3",
       "image_location": "https://via.placeholder.com/150"
-    }
-  },
-  {
-    "model": "dashboard.order",
-    "pk": 1,
-    "fields": {
-      "order_name": "Test Order 1",
-      "order_tags": [
-        1,
-        2
-      ],
-      "order_images": [
-        1,
-        2
-      ]
-    }
-  },
-  {
-    "model": "dashboard.order",
-    "pk": 2,
-    "fields": {
-      "order_name": "Test Order 2",
-      "order_tags": [
-        2,
-        3
-      ],
-      "order_images": [
-        2,
-        3
-      ]
     }
   }
 ]
