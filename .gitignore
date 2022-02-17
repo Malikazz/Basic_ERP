@@ -284,3 +284,5 @@ secret/
 
 # Built Visual Studio Code Extensions
 *.vsix
+images/
+tmp/
