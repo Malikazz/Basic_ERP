@@ -1,6 +1,6 @@
 from typing import List, Dict
-from .models import Order
-from django.contrib.auth.models import User
+from .models import Order, OrderImage, OrderDocument
+from django.contrib.auth.models import User, Group
 from django.db.models import Q
 
 
@@ -39,3 +39,41 @@ def get_orders_by_user_role(user: User) -> Dict[str, Dict[str, object]]:
     orders = {}
     _get_order_and_related_data(user, orders)
     return orders
+
+
+def create_order_images_from_post(item_list: list) -> List[OrderImage]:
+    images = []
+    for image in item_list:
+        images.append(OrderImage.objects.create(name=image._name, image_location=image))
+    return images
+
+
+def create_order_documents_from_post(item_list: list) -> List[OrderDocument]:
+    documents = []
+    for image in item_list:
+        documents.append(
+            OrderDocument.objects.create(name=image._name, file_location=image)
+        )
+    return documents
+
+
+def add_images_to_order(order: Order, images: List[OrderImage]) -> None:
+    for item in images:
+        order.order_images.add(item.pk)
+    order.save()
+
+
+def add_documents_to_order(order: Order, documents: List[OrderDocument]) -> None:
+    for item in documents:
+        order.order_documents.add(item.pk)
+    order.save()
+
+
+def order_change_groups(order: Order, groups: List[Group]) -> None:
+    order.order_tags.all().delete()
+    for item in groups:
+        order.order_tags.add(item.pk)
+
+
+def get_new_order_groups() -> List[Group]:
+    return list(Group.objects.filter(Q(name="Managing Director") | Q(name="Sales")))

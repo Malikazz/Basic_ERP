@@ -1,9 +1,18 @@
 from email import message
-from django.shortcuts import render
+from black import re
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from .quieries import get_orders_by_user_role
+from .quieries import (
+    get_orders_by_user_role,
+    create_order_images_from_post,
+    create_order_documents_from_post,
+    add_images_to_order,
+    add_documents_to_order,
+    order_change_groups,
+    get_new_order_groups,
+)
 from .models import Order, OrderDocument, OrderImage
 from itertools import zip_longest
 from .forms import OrderForm, OrderImageForm, OrderDocumentForm
@@ -71,25 +80,24 @@ def create_order(request):
             and order_document_form.is_valid
             and order_image_form.is_valid
         ):
-            files = request.FILES.getlist("files")
-            images = request.FILES.getlist("images")
             order_documents = []
             image_documents = []
-            for file in files:
-                order_documents.append(
-                    OrderDocument.objects.create(name=file._name, file_location=file)
-                )
-            for image in images:
-                image_documents.append(
-                    OrderImage.objects.create(name=image._name, image_location=image)
-                )
+            image_documents = create_order_images_from_post(
+                request.FILES.getlist("images")
+            )
+            order_documents = create_order_documents_from_post(
+                request.FILES.getlist("files")
+            )
             order = order_form.save()
-            for item in image_documents:
-                order.order_images.add(item.pk)
-            for item in order_documents:
-                order.order_documents.add(item.pk)
-            order.save()
+            add_images_to_order(order, image_documents)
+            add_documents_to_order(order, order_documents)
+            group_list = get_new_order_groups()
+            order_change_groups(order, group_list)
             breakpoint()
+            order.save()
+            ##TODO: After making view order have this route to the view order page with the newly created order
+            messages.success(request, "Order Added Successfully")
+            return redirect("dashboard/create-order")
     return render(
         request,
         "dashboard/create_order.html",
