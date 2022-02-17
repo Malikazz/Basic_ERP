@@ -128,5 +128,29 @@
         6
       ]
     }
+  },
+  {
+    "model": "dashboard.orderimage",
+    "pk": 1,
+    "fields": {
+      "name": "Some Image",
+      "image_location": "https://via.placeholder.com/150"
+    }
+  },
+  {
+    "model": "dashboard.orderimage",
+    "pk": 2,
+    "fields": {
+      "name": "Some Image 2",
+      "image_location": "https://via.placeholder.com/150"
+    }
+  },
+  {
+    "model": "dashboard.orderimage",
+    "pk": 3,
+    "fields": {
+      "name": "Some Image 3",
+      "image_location": "https://via.placeholder.com/150"
+    }
   }
 ]

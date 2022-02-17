@@ -28,7 +28,7 @@ SECRET_KEY = env("DJANGO_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [env("DEV_ADDRESS")]
+ALLOWED_HOSTS = [env("DEV_ADDRESS"), "localhost"]
 
 
 # Application definition
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Edmonton"
 
 USE_I18N = True
 
@@ -140,9 +140,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Default login redirect if no other if provided
-LOGIN_REDIRECT_URL = "/dashboard/"
+LOGIN_REDIRECT_URL = "/"
 
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 ## disables the registration page
 REGISTRATION_OPEN = False
+
+## Email;
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+EMAIL_FILE_PATH = "tmp/emails"
+
+MEDIA_ROOT = "images/"

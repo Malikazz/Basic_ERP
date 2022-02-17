@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1 class="text-center">Create Order</h1>
+<div class="d-flex justify-content-center align-items-center flex-wrap">
+  <form class="col-md-6" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ order_form|crispy }}
+    {{ image_form|crispy }}
+    {{ document_form|crispy }}
+    <input class="btn btn-primary mt-2" type="submit" name="create_order" value="Create"> </input>
+  </form>
+</div>
+{% endblock %}
