@@ -1,0 +1,21 @@
+{
+  // Windows
+  //"python.defaultInterpreterPath": "venv/bin/python"
+  //Linux
+  "python.defaultInterpreterPath": "venv/bin/python3",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "venv/bin/black",
+  "editor.formatOnSave": true,
+  "python.linting.enabled": true,
+  "python.linting.pylintPath": "venv/bin/pylint",
+  "python.linting.lintOnSave": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--load-plugin=pylint_django"
+  ],
+  "gitlab.repositories": {
+    "/home/mal/github/bais3900-2022": {
+      "preferredRemoteName": "bais3900"
+    }
+  }
+}
