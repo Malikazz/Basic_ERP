@@ -54,3 +54,12 @@ password: the-pass-word-01
 
 Please check `user/fixtures/dev_data` for full listing of users
 
+## Libary Docs
+
+### TinyMCE 
+
+https://github.com/jazzband/django-tinymce
+
+### Phone numbers
+
+https://github.com/stefanfoulis/django-phonenumber-field
