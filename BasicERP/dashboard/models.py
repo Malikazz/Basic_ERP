@@ -44,8 +44,10 @@ class Customer(models.Model):
 
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
-    order_materials = models.ForeignKey(OrderMaterial)
-    order_process = models.ForeignKey(OrderProcess)
+    order_materials = models.ForeignKey(
+        OrderMaterial, on_delete=models.CASCADE, null=True
+    )
+    order_process = models.ForeignKey(OrderProcess, on_delete=models.CASCADE, null=True)
     order_tags = models.ManyToManyField(Group)
     order_documents = models.ManyToManyField(OrderDocument, blank=True)
     order_images = models.ManyToManyField(OrderImage, blank=True)
@@ -53,7 +55,7 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     archived = models.BooleanField(default=False)
     notes = models.TextField(blank=True, null=True)
-    approved_by = models.CharField(blank=True, null=True)
+    approved_by = models.CharField(max_length=80, blank=True, null=True)
     approval_date = models.DateTimeField(blank=True, null=True)
     due_date = models.DateTimeField(blank=True, null=True)
     quote = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
