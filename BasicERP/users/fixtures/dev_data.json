@@ -152,5 +152,68 @@
       "name": "Some Image 3",
       "image_location": "https://via.placeholder.com/150"
     }
+  },
+  {
+    "model": "dashboard.ordermaterial",
+    "pk": 1,
+    "fields": {
+      "name": "Crezone"
+    }
+  },
+  {
+    "model": "dashboard.ordermaterial",
+    "pk": 2,
+    "fields": {
+      "name": "Corex"
+    }
+  },
+  {
+    "model": "dashboard.ordermaterial",
+    "pk": 3,
+    "fields": {
+      "name": "Foamboard"
+    }
+  },
+  {
+    "model": "dashboard.ordermaterial",
+    "pk": 4,
+    "fields": {
+      "name": "Banner stock"
+    }
+  },
+  {
+    "model": "dashboard.ordermaterial",
+    "pk": 5,
+    "fields": {
+      "name": "Digital stock"
+    }
+  },
+  {
+    "model": "dashboard.orderprocess",
+    "pk": 1,
+    "fields": {
+      "name": "Vinyl graphic"
+    }
+  },
+  {
+    "model": "dashboard.orderprocess",
+    "pk": 2,
+    "fields": {
+      "name": "Digital print"
+    }
+  },
+  {
+    "model": "dashboard.orderprocess",
+    "pk": 3,
+    "fields": {
+      "name": "Silkscreening"
+    }
+  },
+  {
+    "model": "dashboard.orderprocess",
+    "pk": 4,
+    "fields": {
+      "name": "Other"
+    }
   }
 ]
