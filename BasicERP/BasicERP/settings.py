@@ -156,7 +156,7 @@ EMAIL_FILE_PATH = "tmp/emails"
 
 MEDIA_ROOT = "images/"
 
-## Phone numbers
+## Phone numbers https://github.com/stefanfoulis/django-phonenumber-field
 
 PHONENUMBER_DB_FORMAT = "E164"
 PHONENUMBER_DEFAULT_REGION = "CA"
