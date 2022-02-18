@@ -6,6 +6,7 @@ click==8.0.3
 Django==4.0.1
 django-crispy-forms==1.13.0
 django-environ==0.8.1
+django-phonenumber-field==6.1.0
 isort==5.10.1
 lazy-object-proxy==1.7.1
 mccabe==0.6.1

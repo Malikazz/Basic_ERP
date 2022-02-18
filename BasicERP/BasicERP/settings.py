@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "phonenumber_field",
     "users",
     "dashboard",
     "crispy_forms",
@@ -154,3 +155,9 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = "tmp/emails"
 
 MEDIA_ROOT = "images/"
+
+## Phone numbers
+
+PHONENUMBER_DB_FORMAT = "E164"
+PHONENUMBER_DEFAULT_REGION = "CA"
+PHONENUMBER_DEFAULT_FORMAT = "E164"
