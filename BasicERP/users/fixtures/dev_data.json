@@ -215,5 +215,16 @@
     "fields": {
       "name": "Other"
     }
+  },
+  {
+    "model": "dashboard.customer",
+    "pk": 1,
+    "fields": {
+      "customer_name": "Exxon-Mobile",
+      "address": "155-15555 Edmonton, Alberta, T6J2N8",
+      "phone": "17805555555ex44",
+      "email_contact": "tester@exxm.com",
+      "fax": "17805555555ex44"
+    }
   }
 ]

@@ -14,6 +14,7 @@ class OrderForm(ModelForm):
         model = Order
         fields = [
             "order_name",
+            "customer",
             "order_materials",
             "order_process",
             "due_date",
