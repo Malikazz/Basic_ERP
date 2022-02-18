@@ -97,7 +97,7 @@ def create_order(request):
             order.save()
             ##TODO: After making view order have this route to the view order page with the newly created order
             messages.success(request, "Order Added Successfully")
-            return redirect("dashboard/create-order")
+            return redirect("/")
     return render(
         request,
         "dashboard/create_order.html",

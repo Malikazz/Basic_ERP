@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% block head %}
+{{ order_form.media }}
+{% endblock %}
 {% block content %}
 <h1 class="text-center">Create Order</h1>
 <div class="d-flex justify-content-center align-items-center flex-wrap">
