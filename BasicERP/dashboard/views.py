@@ -1,6 +1,5 @@
-from email import message
-from black import re
-from django.shortcuts import redirect, render
+from django.http import HttpResponseNotAllowed
+from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -12,6 +11,8 @@ from .quieries import (
     add_documents_to_order,
     order_change_groups,
     get_new_order_groups,
+    archive_order,
+    get_order_by_pk,
 )
 from .models import Order, OrderDocument, OrderImage
 from itertools import zip_longest
@@ -107,3 +108,31 @@ def create_order(request):
             "document_form": order_document_form,
         },
     )
+
+
+##TODO: We will need to build something here to handle add / delete of the images and documents,
+# the deleting part is going to be the hardest as if we are using tiny mce for uploading deleting would
+# simply be a missing line form the content of the tiny mce object. So we would have to search the HTML
+# output by tiny mce and ensure we have parity with the db structure of the order.
+def edit_order(request, order_id):
+    order = get_order_by_pk(order_id)
+    if request.method == "POST":
+        order_form = OrderForm(request.POST, instance=order)
+        if request.POST.get("update_order"):
+            if order_form.is_valid():
+                order_form.save()
+                messages.success(request, "Order has been updated")
+                return redirect("/")
+        elif request.POST.get("archive_order"):
+            archive_order(order)
+            messages.success(request, "Order archived")
+    order_form = OrderForm(instance=order)
+    context = {"order_form": order_form}
+    return render(request, "dashboard/edit_order.html", context=context)
+
+
+def upload_image(request):
+    if request.method == "POST":
+        breakpoint()
+        return {"location": "//"}
+    return HttpResponse(HttpResponseNotAllowed)

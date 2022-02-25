@@ -77,3 +77,12 @@ def order_change_groups(order: Order, groups: List[Group]) -> None:
 
 def get_new_order_groups() -> List[Group]:
     return list(Group.objects.filter(Q(name="Managing Director") | Q(name="Sales")))
+
+
+def archive_order(order: Order) -> None:
+    order.archived = True
+    order.save()
+
+
+def get_order_by_pk(pk: int) -> Order:
+    return Order.objects.get(pk=pk)
