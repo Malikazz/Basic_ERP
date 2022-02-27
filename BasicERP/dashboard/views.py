@@ -1,4 +1,6 @@
-import PIL
+import base64
+from io import BytesIO
+from django.core.files.base import ContentFile
 from django.http import HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
@@ -128,7 +130,7 @@ def edit_order(request, order_id):
             archive_order(order)
             messages.success(request, "Order archived")
     order_form = OrderForm(instance=order)
-    context = {"order_form": order_form}
+    context = {"order_form": order_form, "order_id": order_id}
     return render(request, "dashboard/edit_order.html", context=context)
 
 
@@ -141,9 +143,16 @@ def upload_image(request):
         image_name = request.POST.get("file_name")
         image_base64 = request.POST.get("file_base64")
         image_type = request.POST.get("file_type")
-        OrderImageForm()
-        breakpoint()
-        return JsonResponse({"location": "//"})
+        order_id = request.POST.get("order_id")
+        order = get_order_by_pk(order_id)
+        img_bytes = base64.b64decode(image_base64)
+        image_content = ContentFile(img_bytes, name=image_name)
+        order_image = OrderImage.objects.create(
+            name=image_name, image_location=image_content
+        )
+        order_image.save()
+        ##order.order_images.add(order_image)
+        return JsonResponse({"location": order_image.image_location})
     return HttpResponse(HttpResponseNotAllowed)
 
 
