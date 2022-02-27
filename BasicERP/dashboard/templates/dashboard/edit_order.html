@@ -7,6 +7,7 @@
 {% block content %}
 <h1 class="text-center">Order</h1>
 <div class="d-flex justify-content-center align-items-center flex-wrap">
+  <input class="d-none" value="{{order_id}}" id="order_id"></input>
   <form class="col-md-6" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ order_form|crispy }}
@@ -37,13 +38,15 @@
       _name = blobInfo.blob().name;
       _type = blobInfo.blob().type;
       _base64 = blobInfo.base64()
+      _order_id = document.querySelector("#order_id").value
       $.ajax({
         url: '/upload-image/',
         type: 'post',
         data: {
           "file_name": _name,
           "file_type": _type,
-          "file_base64": _base64
+          "file_base64": _base64,
+          "order_id": _order_id
         },
         headers: { "X-CSRFToken": document.querySelector('input[name="csrfmiddlewaretoken"]').value },
         success: (data, textStatus, xhr) => { successcb(data.location) },
