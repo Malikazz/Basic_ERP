@@ -1,4 +1,5 @@
-from django.http import HttpResponseNotAllowed
+import PIL
+from django.http import HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -131,7 +132,22 @@ def edit_order(request, order_id):
     return render(request, "dashboard/edit_order.html", context=context)
 
 
+## TODO: Need to handle the image creation via PIL
+## then add image to db
+## Add image to the order ( need to send the order ID )
+## Figure out how to delete old images ( probably a seperate view)
 def upload_image(request):
+    if request.method == "POST":
+        image_name = request.POST.get("file_name")
+        image_base64 = request.POST.get("file_base64")
+        image_type = request.POST.get("file_type")
+        OrderImageForm()
+        breakpoint()
+        return JsonResponse({"location": "//"})
+    return HttpResponse(HttpResponseNotAllowed)
+
+
+def upload_document(request):
     if request.method == "POST":
         breakpoint()
         return {"location": "//"}
