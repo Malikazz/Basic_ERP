@@ -78,7 +78,6 @@ def create_order(request):
         order_form = OrderForm(request.POST)
         order_document_form = OrderDocumentForm(request.POST)
         order_image_form = OrderImageForm(request.POST)
-
         if (
             order_form.is_valid
             and order_document_form.is_valid
@@ -97,7 +96,6 @@ def create_order(request):
             add_documents_to_order(order, order_documents)
             group_list = get_new_order_groups()
             order_change_groups(order, group_list)
-            breakpoint()
             order.save()
             ##TODO: After making view order have this route to the view order page with the newly created order
             messages.success(request, "Order Added Successfully")
@@ -140,19 +138,12 @@ def edit_order(request, order_id):
 ## Figure out how to delete old images ( probably a seperate view)
 def upload_image(request):
     if request.method == "POST":
-        image_name = request.POST.get("file_name")
-        image_base64 = request.POST.get("file_base64")
-        image_type = request.POST.get("file_type")
         order_id = request.POST.get("order_id")
         order = get_order_by_pk(order_id)
-        img_bytes = base64.b64decode(image_base64)
-        image_content = ContentFile(img_bytes, name=image_name)
-        order_image = OrderImage.objects.create(
-            name=image_name, image_location=image_content
-        )
-        order_image.save()
-        ##order.order_images.add(order_image)
-        return JsonResponse({"location": order_image.image_location})
+        image_form = OrderImageForm(request.POST)
+        if image_form.is_valid:
+            order_image = image_form.save()
+            return JsonResponse({"location": order_image.url})
     return HttpResponse(HttpResponseNotAllowed)
 
 

@@ -25,7 +25,6 @@
     toolbar: 'undo redo | link image | code',
     /* enable title field in the Image dialog*/
     image_title: true,
-    automatic_uploads: true,
     /* enable automatic uploads of images represented by blob or data URIs*/
 
     /*
@@ -37,7 +36,7 @@
     images_upload_handler: (blobInfo, successcb, failure, progress) => {
       _name = blobInfo.blob().name;
       _type = blobInfo.blob().type;
-      _base64 = blobInfo.base64()
+      _base64 = blobInfo.base64();
       _order_id = document.querySelector("#order_id").value
       $.ajax({
         url: '/upload-image/',
@@ -71,7 +70,19 @@
 
       input.onchange = function () {
         var file = this.files[0];
-
+        formData = new FormData()
+        formData.append('file', input.value, file.title)
+        $.ajax({
+          url: 'upload-image/',
+          type: 'post',
+          data: formData,
+          headers: { "X-CSRFToken": document.querySelector('input[name="csrfmiddlewaretoken"]').value },
+          success: (data, textStatus, xhr) => {
+            console.log(data, textStatus, xhr);
+            debugger;
+          }
+        })
+        debugger;
         var reader = new FileReader();
         reader.onload = function () {
           /*
