@@ -1,6 +1,9 @@
-from email import message
-from black import re
-from django.shortcuts import redirect, render
+import base64
+from http import HTTPStatus
+from io import BytesIO
+from django.core.files.base import ContentFile
+from django.http import HttpResponseForbidden, HttpResponseNotAllowed, JsonResponse
+from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -12,6 +15,10 @@ from .quieries import (
     add_documents_to_order,
     order_change_groups,
     get_new_order_groups,
+    archive_order,
+    get_order_by_pk,
+    get_order_images_documents,
+    remove_delete_image,
 )
 from .models import Order, OrderDocument, OrderImage
 from itertools import zip_longest
@@ -20,17 +27,6 @@ from .forms import OrderForm, OrderImageForm, OrderDocumentForm
 # Create your views here.
 @login_required
 def index(request):
-    send_mail(
-        "This is a subject",
-        "Message",
-        "admin@admin.com",
-        ["user@user.com"],
-        True,
-        None,
-        None,
-        None,
-        "<h1>This is a message</h1>",
-    )
     orders_list = get_orders_by_user_role(request.user)
     orders = []
     for order in orders_list:
@@ -74,7 +70,6 @@ def create_order(request):
         order_form = OrderForm(request.POST)
         order_document_form = OrderDocumentForm(request.POST)
         order_image_form = OrderImageForm(request.POST)
-
         if (
             order_form.is_valid
             and order_document_form.is_valid
@@ -91,9 +86,6 @@ def create_order(request):
             order = order_form.save()
             add_images_to_order(order, image_documents)
             add_documents_to_order(order, order_documents)
-            group_list = get_new_order_groups()
-            order_change_groups(order, group_list)
-            breakpoint()
             order.save()
             ##TODO: After making view order have this route to the view order page with the newly created order
             messages.success(request, "Order Added Successfully")
@@ -107,3 +99,66 @@ def create_order(request):
             "document_form": order_document_form,
         },
     )
+
+
+def edit_order(request, order_id):
+    order, images, documents = get_order_images_documents(order_id)
+    if request.method == "POST":
+        order_form = OrderForm(request.POST, instance=order)
+        order_image_form = OrderImageForm(request.POST)
+        order_document_form = OrderDocumentForm(request.POST)
+        if request.POST.get("update_order"):
+            if (
+                order_form.is_valid
+                and order_document_form.is_valid
+                and order_image_form.is_valid
+            ):
+                order_documents = []
+                image_documents = []
+                image_documents = create_order_images_from_post(
+                    request.FILES.getlist("images")
+                )
+                order_documents = create_order_documents_from_post(
+                    request.FILES.getlist("files")
+                )
+                order = order_form.save()
+                add_images_to_order(order, image_documents)
+                add_documents_to_order(order, order_documents)
+                order.save()
+                messages.success(request, "Order Updated Successfully")
+                return redirect("/")
+        elif request.POST.get("archive_order"):
+            archive_order(order)
+            messages.success(request, "Order archived")
+    order_form = OrderForm(instance=order)
+    order_image_form = OrderImageForm()
+    order_document_form = OrderDocumentForm()
+    context = {
+        "order_form": order_form,
+        "order_id": order_id,
+        "image_form": order_image_form,
+        "document_form": order_document_form,
+        "images": images,
+        "documents": documents,
+    }
+    return render(request, "dashboard/edit_order.html", context=context)
+
+
+def remove_image(request):
+    if request.method == "POST":
+        order_id = request.POST.get("order_id")
+        image_id = request.POST.get("image_id")
+        remove_delete_image(order_id, image_id)
+        return HttpResponse(status=201)
+    return HttpResponse(HttpResponseNotAllowed)
+
+
+def remove_document(request):
+    if request.method == "POST":
+        print(request.POST)
+        return HttpResponse(status=201)
+    return HttpResponse(HttpResponseNotAllowed)
+
+
+def view_order(request):
+    return HttpResponse(HttpResponseNotAllowed)

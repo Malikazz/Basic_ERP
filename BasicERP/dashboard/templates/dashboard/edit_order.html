@@ -5,15 +5,65 @@
 {{ order_form.media }}
 {% endblock %}
 {% block content %}
-<h1 class="text-center">Order {{}}</h1>
-<div class="d-flex justify-content-center align-items-center flex-wrap">
+<h1 class="text-center">Modify Order</h1>
+<div class="d-flex justify-content-center flex-wrap">
+  <input class="d-none" value="{{order_id}}" id="order_id"></input>
   <form class="col-md-6" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ order_form|crispy }}
+    <h5 class="mt-3">Add new images or documents</h5>
     {{ image_form|crispy }}
     {{ document_form|crispy }}
     <input class="btn btn-primary mt-2" type="submit" name="update_order" value="Update"> </input>
     <input class="btn btn-info mt-2" type="submit" name="archive_order" value="Archive"> </input>
   </form>
+  <div id="" class="col-md-6 d-flex align-items-center flex-column">
+    <h4>Images:</h4>
+    {% for item in images %}
+    <form method="post" onsubmit="return image_remove_submit(this)" class="mt-3 mb-3">
+      {% csrf_token %}
+      <div class="border border-dark rounded p-2">
+        <input class="d-none" name="order_id" value={{order_id}}>
+        <input class="d-none" name="image_id" value={{item.id}}>
+        <span>{{item.name}}</span>
+        <input class="btn btn-danger ml-4" type="submit" value="X"
+          onclick="return confirm('This will permantly remove this image are you sure?');" />
+      </div>
+    </form>
+    {% endfor %}
+    <h4>Documents</h4>
+    {% for item in documents %}
+    <form method="post" onsubmit="return document_remove_submit(this)" class="mt-3 mb-3">
+      {% csrf_token %}
+      <div class="border border-dark rounded p-2">
+        <input class="d-none" name="order_id" value={{order_id}}>
+        <input class="d-none" name="image_id" value={{item.id}}>
+        <span>{{item.name}}</span>
+        <input class="btn btn-danger ml-4" type="submit" value="X"
+          onclick="return confirm('This will permantly remove this document are you sure?');" />
+      </div>
+    </form>
+    {% endfor %}
+  </div>
 </div>
+<script>
+  function image_remove_submit(el) {
+    formData = new FormData(el);
+    $.ajax({
+      url: {% url 'dashboard:remove-image' %},
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: (json) => {
+        el.remove()
+      },
+      error: (json) => {
+        //TODO: remove this before deploying
+        console.log("error deleting")
+      }
+    });
+  return false;
+  }
+</script>
 {% endblock %}

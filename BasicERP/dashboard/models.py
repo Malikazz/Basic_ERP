@@ -14,6 +14,9 @@ class OrderDocument(models.Model):
 
 class OrderImage(models.Model):
     name = models.CharField(max_length=255)
+    alt_description = models.CharField(max_length=255, blank=True, null=True)
+    width = models.IntegerField(blank=True, null=True)
+    height = models.IntegerField(blank=True, null=True)
     image_location = models.ImageField()
 
     def __str__(self):
