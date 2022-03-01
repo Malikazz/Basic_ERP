@@ -27,17 +27,6 @@ from .forms import OrderForm, OrderImageForm, OrderDocumentForm
 # Create your views here.
 @login_required
 def index(request):
-    send_mail(
-        "This is a subject",
-        "Message",
-        "admin@admin.com",
-        ["user@user.com"],
-        True,
-        None,
-        None,
-        None,
-        "<h1>This is a message</h1>",
-    )
     orders_list = get_orders_by_user_role(request.user)
     orders = []
     for order in orders_list:
@@ -97,8 +86,6 @@ def create_order(request):
             order = order_form.save()
             add_images_to_order(order, image_documents)
             add_documents_to_order(order, order_documents)
-            group_list = get_new_order_groups()
-            order_change_groups(order, group_list)
             order.save()
             ##TODO: After making view order have this route to the view order page with the newly created order
             messages.success(request, "Order Added Successfully")
@@ -114,10 +101,6 @@ def create_order(request):
     )
 
 
-##TODO: We will need to build something here to handle add / delete of the images and documents,
-# the deleting part is going to be the hardest as if we are using tiny mce for uploading deleting would
-# simply be a missing line form the content of the tiny mce object. So we would have to search the HTML
-# output by tiny mce and ensure we have parity with the db structure of the order.
 def edit_order(request, order_id):
     order, images, documents = get_order_images_documents(order_id)
     if request.method == "POST":
@@ -141,8 +124,6 @@ def edit_order(request, order_id):
                 order = order_form.save()
                 add_images_to_order(order, image_documents)
                 add_documents_to_order(order, order_documents)
-                group_list = get_new_order_groups()
-                order_change_groups(order, group_list)
                 order.save()
                 messages.success(request, "Order Updated Successfully")
                 return redirect("/")
@@ -176,4 +157,8 @@ def remove_document(request):
     if request.method == "POST":
         print(request.POST)
         return HttpResponse(status=201)
+    return HttpResponse(HttpResponseNotAllowed)
+
+
+def view_order(request):
     return HttpResponse(HttpResponseNotAllowed)

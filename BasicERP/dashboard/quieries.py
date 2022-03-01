@@ -71,9 +71,10 @@ def add_documents_to_order(order: Order, documents: List[OrderDocument]) -> None
 
 
 def order_change_groups(order: Order, groups: List[Group]) -> None:
-    order.order_tags.all().remove()
-    for item in groups:
-        order.order_tags.add(item.pk)
+    with transaction.atomic():
+        order.order_tags.clear()
+        for item in groups:
+            order.order_tags.add(item.pk)
 
 
 def get_new_order_groups() -> List[Group]:

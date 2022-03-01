@@ -11,10 +11,9 @@
       <th>Order ID</th>
       <th>Order Name</th>
       <th>Order Tags</th>
-      <th>Order Images</th>
-      <th>Order Files</th>
       <th>Last Updated</th>
       <th>Created At</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -27,20 +26,15 @@
         <div class="p-2 m-1 bg-secondary text-light text-center rounded small">{{tag}}</div>
         {% endfor %}
       </td>
-      <td>
-        {% for image in item.order_images %}
-        <a href="{{image.image_location}}">{{image.name}}</a>
-        {% endfor %}
-      </td>
-      <td>
-        {% for file in item.order_files %}
-        <a href="{{file.file_location}}">{{file.name}}</a>
-        {% endfor %}
-      </td>
       <td>{{item.updated_at}}</td>
       <td>{{item.created_at}}</td>
+      <td>
+        <a class="btn btn-primary" href="{% url 'dashboard:view-order' item.id %}">View</a>
+        <a class="btn btn-secondary" href="{% url 'dashboard:edit-order' item.id %}">Edit</a>
+      </td>
     </tr>
     {% endfor %}
+
   </tbody>
 </table>
 <script>
