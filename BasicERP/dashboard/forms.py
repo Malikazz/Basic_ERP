@@ -15,7 +15,7 @@ class OrderForm(ModelForm):
         self.cleaned_data = super().clean()
         managing_group = Group.objects.filter(name="Managing Director")
         ## always keeps managing_group in the order tags regardless of choices
-        if managing_group not in self["order_tags"].value():
+        if list(managing_group)[0] not in list(self.cleaned_data["order_tags"]):
             self.cleaned_data["order_tags"] = (
                 self.cleaned_data["order_tags"] | managing_group
             )
