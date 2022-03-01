@@ -1,7 +1,8 @@
 import base64
+from http import HTTPStatus
 from io import BytesIO
 from django.core.files.base import ContentFile
-from django.http import HttpResponseNotAllowed, JsonResponse
+from django.http import HttpResponseForbidden, HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -16,6 +17,8 @@ from .quieries import (
     get_new_order_groups,
     archive_order,
     get_order_by_pk,
+    get_order_images_documents,
+    remove_delete_image,
 )
 from .models import Order, OrderDocument, OrderImage
 from itertools import zip_longest
@@ -116,39 +119,61 @@ def create_order(request):
 # simply be a missing line form the content of the tiny mce object. So we would have to search the HTML
 # output by tiny mce and ensure we have parity with the db structure of the order.
 def edit_order(request, order_id):
-    order = get_order_by_pk(order_id)
+    order, images, documents = get_order_images_documents(order_id)
     if request.method == "POST":
         order_form = OrderForm(request.POST, instance=order)
+        order_image_form = OrderImageForm(request.POST)
+        order_document_form = OrderDocumentForm(request.POST)
         if request.POST.get("update_order"):
-            if order_form.is_valid():
-                order_form.save()
-                messages.success(request, "Order has been updated")
+            if (
+                order_form.is_valid
+                and order_document_form.is_valid
+                and order_image_form.is_valid
+            ):
+                order_documents = []
+                image_documents = []
+                image_documents = create_order_images_from_post(
+                    request.FILES.getlist("images")
+                )
+                order_documents = create_order_documents_from_post(
+                    request.FILES.getlist("files")
+                )
+                order = order_form.save()
+                add_images_to_order(order, image_documents)
+                add_documents_to_order(order, order_documents)
+                group_list = get_new_order_groups()
+                order_change_groups(order, group_list)
+                order.save()
+                messages.success(request, "Order Updated Successfully")
                 return redirect("/")
         elif request.POST.get("archive_order"):
             archive_order(order)
             messages.success(request, "Order archived")
     order_form = OrderForm(instance=order)
-    context = {"order_form": order_form, "order_id": order_id}
+    order_image_form = OrderImageForm()
+    order_document_form = OrderDocumentForm()
+    context = {
+        "order_form": order_form,
+        "order_id": order_id,
+        "image_form": order_image_form,
+        "document_form": order_document_form,
+        "images": images,
+        "documents": documents,
+    }
     return render(request, "dashboard/edit_order.html", context=context)
 
 
-## TODO: Need to handle the image creation via PIL
-## then add image to db
-## Add image to the order ( need to send the order ID )
-## Figure out how to delete old images ( probably a seperate view)
-def upload_image(request):
+def remove_image(request):
     if request.method == "POST":
         order_id = request.POST.get("order_id")
-        order = get_order_by_pk(order_id)
-        image_form = OrderImageForm(request.POST)
-        if image_form.is_valid:
-            order_image = image_form.save()
-            return JsonResponse({"location": order_image.url})
+        image_id = request.POST.get("image_id")
+        remove_delete_image(order_id, image_id)
+        return HttpResponse(status=201)
     return HttpResponse(HttpResponseNotAllowed)
 
 
-def upload_document(request):
+def remove_document(request):
     if request.method == "POST":
-        breakpoint()
-        return {"location": "//"}
+        print(request.POST)
+        return HttpResponse(status=201)
     return HttpResponse(HttpResponseNotAllowed)

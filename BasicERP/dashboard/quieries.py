@@ -1,7 +1,8 @@
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from .models import Order, OrderImage, OrderDocument
 from django.contrib.auth.models import User, Group
 from django.db.models import Q
+from django.db import transaction
 
 
 def _get_order_and_related_data(user: User, orders: dict) -> None:
@@ -70,7 +71,7 @@ def add_documents_to_order(order: Order, documents: List[OrderDocument]) -> None
 
 
 def order_change_groups(order: Order, groups: List[Group]) -> None:
-    order.order_tags.all().delete()
+    order.order_tags.all().remove()
     for item in groups:
         order.order_tags.add(item.pk)
 
@@ -86,3 +87,25 @@ def archive_order(order: Order) -> None:
 
 def get_order_by_pk(pk: int) -> Order:
     return Order.objects.get(pk=pk)
+
+
+def get_order_images_documents(
+    order_id: int,
+) -> Tuple[Order, OrderImage, OrderDocument]:
+    order = Order.objects.get(pk=order_id)
+    images = list(order.order_images.all())
+    documents = list(order.order_documents.all())
+    return (order, images, documents)
+
+
+def get_order_image(image_id: int) -> OrderImage:
+    return OrderImage.objects.get(pk=image_id)
+
+
+def remove_delete_image(order_id: int, image_id: int) -> None:
+    with transaction.atomic():
+        order = get_order_by_pk(order_id)
+        image = get_order_image(image_id)
+        order.order_images.remove(image)
+        OrderImage.objects.filter(id=image.pk).delete()
+    return None
