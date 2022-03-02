@@ -102,6 +102,7 @@ def create_order(request):
     )
 
 
+@login_required
 def edit_order(request, order_id):
     order, images, documents = get_order_images_documents(order_id)
     if request.method == "POST":
@@ -145,6 +146,7 @@ def edit_order(request, order_id):
     return render(request, "dashboard/edit_order.html", context=context)
 
 
+@login_required
 def remove_image(request):
     if request.method == "POST":
         order_id = request.POST.get("order_id")
@@ -154,6 +156,7 @@ def remove_image(request):
     return HttpResponse(HttpResponseNotAllowed)
 
 
+@login_required
 def remove_document(request):
     if request.method == "POST":
         print(request.POST)
@@ -161,6 +164,7 @@ def remove_document(request):
     return HttpResponse(HttpResponseNotAllowed)
 
 
+@login_required
 def view_order(request, order_id):
     order, order_images, order_documents = get_order_images_documents(order_id)
     customer = get_customer(order_id)
