@@ -1,5 +1,5 @@
 from typing import List, Dict, Tuple
-from .models import Order, OrderImage, OrderDocument
+from .models import Order, OrderImage, OrderDocument, Customer
 from django.contrib.auth.models import User, Group
 from django.db.models import Q
 from django.db import transaction
@@ -110,3 +110,7 @@ def remove_delete_image(order_id: int, image_id: int) -> None:
         order.order_images.remove(image)
         OrderImage.objects.filter(id=image.pk).delete()
     return None
+
+
+def get_customer(order_id: int) -> Customer:
+    return Order.objects.get(pk=order_id).customer
