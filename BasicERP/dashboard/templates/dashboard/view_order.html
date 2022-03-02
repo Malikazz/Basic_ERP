@@ -5,25 +5,25 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <p class="h3">Customer</p>
+    <p class="h3 text-primary">Customer</p>
     {% include "dashboard/component/customer_header.html" with customer=customer %}
   </div>
   <div class="col-md-6">
-    <p class="h3">Employee</p>
+    <p class="h3 text-primary">Employee</p>
     {% include "dashboard/component/sales_rep_header.html" with user=user %}
   </div>
 </div>
 <div class="row">
-  <p class="h3">Order Info</p>
+  <p class="h3 text-primary">Order Info</p>
   {% include "dashboard/component/order_printer_friendly.html" with order=order %}
 </div>
-<p class="h3">Images</p>
+<p class="h3 text-primary">Images</p>
 {% for item in order_images %}
 <div class="row">
   {% include "dashboard/component/order_image.html" with image=item %}
 </div>
 {% endfor %}
-<p class="h3">Download Documents</p>
+<p class="h3 text-primary">Download Documents</p>
 <div class="row mb-5">
   {% for item in order_documents %}
   {% include "dashboard/component/order_document.html" with document=item %}
