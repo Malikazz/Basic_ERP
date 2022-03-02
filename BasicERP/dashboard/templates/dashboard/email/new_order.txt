@@ -1,0 +1,4 @@
+New Order
+There is a new order in your domain. {{order.link}}
+Creator: {{ order_creator }} Created Date: {{order.created_at}} Due Date: {{order.due_date}}
+Customer: {{ order.customer }}
