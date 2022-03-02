@@ -19,6 +19,7 @@ from .quieries import (
     get_order_by_pk,
     get_order_images_documents,
     remove_delete_image,
+    get_customer,
 )
 from .models import Order, OrderDocument, OrderImage
 from itertools import zip_longest
@@ -160,5 +161,13 @@ def remove_document(request):
     return HttpResponse(HttpResponseNotAllowed)
 
 
-def view_order(request):
-    return HttpResponse(HttpResponseNotAllowed)
+def view_order(request, order_id):
+    order, order_images, order_documents = get_order_images_documents(order_id)
+    customer = get_customer(order_id)
+    context = {
+        "customer": customer,
+        "order": order,
+        "order_images": order_images,
+        "order_documents": order_documents,
+    }
+    return render(request, "dashboard/view_order.html", context=context)
