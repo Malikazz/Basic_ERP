@@ -88,7 +88,6 @@ def create_order(request):
             add_images_to_order(order, image_documents)
             add_documents_to_order(order, order_documents)
             order.save()
-            ##TODO: After making view order have this route to the view order page with the newly created order
             messages.success(request, "Order Added Successfully")
             return redirect("/")
     return render(

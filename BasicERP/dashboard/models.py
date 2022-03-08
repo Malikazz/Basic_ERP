@@ -1,5 +1,7 @@
+from pydoc import describe
 from django.db import models
 from django.contrib.auth.models import Group
+from django.forms import DateField
 from phonenumber_field.modelfields import PhoneNumberField
 
 # TODO: Need to test the one drive api to see how this works
@@ -23,15 +25,42 @@ class OrderImage(models.Model):
         return self.name
 
 
-class OrderMaterial(models.Model):
+class Merchant(models.Model):
+    company_name = models.CharField(max_length=75)
+    contact_name = models.CharField(max_length=75)
+    contact_email = models.EmailField(null=True, blank=True)
+    contact_number = PhoneNumberField()
+    address = models.CharField(max_length=255)
+
+    def __str__(self):
+        self.company_name
+
+
+class Material(models.Model):
     name = models.CharField(max_length=55)
+    material_code = models.CharField(max_length=255, unique=True)
+    units = models.IntegerField()
+    unit_measurement = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 
-class OrderProcess(models.Model):
+class MerchantMaterials(models.Model):
+    material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    merchant_id = models.ForeignKey(Merchant, on_delete=models.CASCADE)
+    unit_cost = models.DecimalField(max_digits=6, decimal_places=2)
+    purchase_date = models.DateField()
+    units_on_order = models.IntegerField
+    po = models.CharField(max_length=100)
+    merchant_material_code = models.CharField(max_length=100, blank=True, null=True)
+    merchant_unit_measurement = models.CharField(max_length=50, blank=True, null=True)
+
+
+class Process(models.Model):
     name = models.CharField(max_length=55)
+    description = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -50,10 +79,8 @@ class Customer(models.Model):
 
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
-    order_materials = models.ForeignKey(
-        OrderMaterial, on_delete=models.CASCADE, null=True
-    )
-    order_process = models.ForeignKey(OrderProcess, on_delete=models.CASCADE, null=True)
+    order_materials = models.ForeignKey(Material, on_delete=models.CASCADE, null=True)
+    order_process = models.ForeignKey(Process, on_delete=models.CASCADE, null=True)
     order_tags = models.ManyToManyField(Group)
     order_documents = models.ManyToManyField(OrderDocument, blank=True)
     order_images = models.ManyToManyField(OrderImage, blank=True)
