@@ -30,6 +30,7 @@ from .forms import OrderForm, OrderImageForm, OrderDocumentForm
 def index(request):
     orders_list = get_orders_by_user_role(request.user)
     orders = []
+    ## TODO: show nisarg a thing
     for order in orders_list:
         order_tags = []
         order_images = []
