@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import Group
 from django.forms import DateField
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import User
 
 # TODO: Need to test the one drive api to see how this works
 # https://docs.microsoft.com/en-us/graph/api/resources/onedrive?view=graph-rest-1.0
@@ -79,8 +80,8 @@ class Customer(models.Model):
 
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
-    order_materials = models.ForeignKey(Material, on_delete=models.CASCADE, null=True)
-    order_process = models.ForeignKey(Process, on_delete=models.CASCADE, null=True)
+    order_materials = models.ForeignKey(Material, on_delete=models.PROTECT, null=True)
+    order_process = models.ForeignKey(Process, on_delete=models.PROTECT, null=True)
     order_tags = models.ManyToManyField(Group)
     order_documents = models.ManyToManyField(OrderDocument, blank=True)
     order_images = models.ManyToManyField(OrderImage, blank=True)
@@ -94,6 +95,7 @@ class Order(models.Model):
     quote = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     po_number = models.CharField(max_length=255, blank=True, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
+    order_creator = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.order_name

@@ -30,7 +30,6 @@ from .forms import OrderForm, OrderImageForm, OrderDocumentForm
 def index(request):
     orders_list = get_orders_by_user_role(request.user)
     orders = []
-    ## TODO: show nisarg a thing
     for order in orders_list:
         order_tags = []
         order_images = []
@@ -64,7 +63,9 @@ def index(request):
 
 @login_required
 def create_order(request):
-    order_form = OrderForm()
+    order = Order()
+    order.order_creator = request.user
+    order_form = OrderForm(instance=order)
     order_document_form = OrderDocumentForm()
     order_image_form = OrderImageForm()
 
@@ -173,5 +174,6 @@ def view_order(request, order_id):
         "order": order,
         "order_images": order_images,
         "order_documents": order_documents,
+        "order_creator": order.order_creator,
     }
     return render(request, "dashboard/view_order.html", context=context)
