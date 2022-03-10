@@ -1,9 +1,10 @@
-from pydoc import describe
+import os
 from django.db import models
 from django.contrib.auth.models import Group
 from django.forms import DateField
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
+from django.dispatch import receiver
 
 # TODO: Need to test the one drive api to see how this works
 # https://docs.microsoft.com/en-us/graph/api/resources/onedrive?view=graph-rest-1.0
@@ -99,3 +100,25 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_name
+
+
+@receiver(models.signals.post_delete, sender=OrderImage)
+def auto_delete_image_on_delete(sender, instance, **kwargs):
+    """
+    Deletes image from filesystem when
+    model instance is deleted.
+    """
+    if instance.image_location:
+        if os.path.isfile(instance.image_location.path):
+            os.remove(instance.image_location.path)
+
+
+@receiver(models.signals.post_delete, sender=OrderDocument)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem when
+    model instance is deleted.
+    """
+    if instance.file_location:
+        if os.path.isfile(instance.file_location.path):
+            os.remove(instance.file_location.path)
