@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import CharField, HiddenInput, ModelForm
 from django import forms
 from .models import Order, OrderDocument, OrderImage
 from django.contrib.auth.models import Group
@@ -9,7 +9,6 @@ class DateInput(forms.DateInput):
     input_type = "date"
 
 
-## Most basic implementaion of a model form
 class OrderForm(ModelForm):
     def clean(self):
         self.cleaned_data = super().clean()
@@ -31,10 +30,12 @@ class OrderForm(ModelForm):
             "po_number",
             "notes",
             "order_tags",
+            "order_creator",
         ]
         widgets = {
             "due_date": DateInput(),
             "notes": TinyMCE(attrs={"cols": 80, "rows": 20}),
+            "order_creator": HiddenInput(),
         }
 
 
