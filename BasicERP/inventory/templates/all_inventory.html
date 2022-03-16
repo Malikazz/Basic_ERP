@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<table id="myTable" data-order='[[ 0, "asc" ]]' data-page-length='25'>
+  <thead>
+    <tr>
+      <th>Metarial ID</th>
+      <th>Units Available</th>
+      <th>Units Defective</th>
+      <th>Units Reservered</th>
+      <th>Total Units On Order</th>
+   
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in material %}
+    <tr>
+      <td>{{material.id}}</td>
+      <td>{{material.units_available}}</td>
+      <td>{{material.units_defective}}</td>
+      <td>{{material.units_reserved_for_orders}}</td>
+      <td>{{material.total_units_on_order}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

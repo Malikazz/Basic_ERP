@@ -41,7 +41,7 @@ then `python manage.py migrate` to setup your db. After this your project should
 ## Loading Dev Data
 
 - To load manual testing data into the app please run `python manage.py initdata`
-- To add to the data being loaded look at the `BasicERP/fixtures/dev_data.json` file and edit as neeeded.
+- To add to the data being loaded look at the `BasicERP/users/fixtures/dev_data.json` file and edit as neeeded.
 
 Be aware using initdata will overrite data by pk but will leave anything its not over writting.
 This may lead to a poor state if you have added data in a means beyond initdata its recomened 

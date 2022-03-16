@@ -1,0 +1,57 @@
+[
+    {
+        "model": "inventory.material",
+        "pk": 1,
+        "fields": {
+            "name": "Crezone",
+            "material_code": "CRE-01",
+            "units": "5",
+            "description": "this is a description for Crezone",
+            "status": "True"
+        }
+    },
+    {
+        "model": "inventory.material",
+        "pk": 2,
+        "fields": {
+            "name": "Corex",
+            "material_code": "COR-01",
+            "units": "5",
+            "description": "this is a description for Corex",
+            "status": "True"
+        }
+    },
+    {
+        "model": "inventory.material",
+        "pk": 3,
+        "fields": {
+            "name": "Foamboard",
+            "material_code": "FOA-01",
+            "units": "5",
+            "description": "this is a description for Foamboard",
+            "status": "True"
+        }
+    },
+    {
+        "model": "inventory.material",
+        "pk": 4,
+        "fields": {
+            "name": "Banner stock",
+            "material_code": "BAN-01",
+            "units": "5",
+            "description": "this is a description for Banner stock",
+            "status": "True"
+        }
+    },
+    {
+        "model": "inventory.material",
+        "pk": 5,
+        "fields": {
+            "name": "Digital stock",
+            "material_code": "DIG-01",
+            "units": "5",
+            "description": "this is a description for Digital stock",
+            "status": "True"
+        }
+    }
+]

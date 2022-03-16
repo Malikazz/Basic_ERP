@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "dashboard",
     "crispy_forms",
     "tinymce",
+    "inventory"
 ]
 
 MIDDLEWARE = [
@@ -147,10 +148,10 @@ LOGIN_REDIRECT_URL = "/"
 
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 
-## disables the registration page
+# disables the registration page
 REGISTRATION_OPEN = False
 
-## Email;
+# Email;
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 
@@ -159,7 +160,7 @@ EMAIL_FILE_PATH = "tmp/emails"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = "/media/"
 
-## Phone numbers https://github.com/stefanfoulis/django-phonenumber-field
+# Phone numbers https://github.com/stefanfoulis/django-phonenumber-field
 
 PHONENUMBER_DB_FORMAT = "E164"
 PHONENUMBER_DEFAULT_REGION = "CA"

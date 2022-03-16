@@ -154,56 +154,6 @@
     }
   },
   {
-    "model": "dashboard.material",
-    "pk": 1,
-    "fields": {
-      "name": "Crezone",
-      "material_code": "CRE-01",
-      "units": "5",
-      "description": "this is a description for Crezone"
-    }
-  },
-  {
-    "model": "dashboard.material",
-    "pk": 2,
-    "fields": {
-      "name": "Corex",
-      "material_code": "COR-01",
-      "units": "5",
-      "description": "this is a description for Corex"
-    }
-  },
-  {
-    "model": "dashboard.material",
-    "pk": 3,
-    "fields": {
-      "name": "Foamboard",
-      "material_code": "FOA-01",
-      "units": "5",
-      "description": "this is a description for Foamboard"
-    }
-  },
-  {
-    "model": "dashboard.material",
-    "pk": 4,
-    "fields": {
-      "name": "Banner stock",
-      "material_code": "BAN-01",
-      "units": "5",
-      "description": "this is a description for Banner stock"
-    }
-  },
-  {
-    "model": "dashboard.material",
-    "pk": 5,
-    "fields": {
-      "name": "Digital stock",
-      "material_code": "DIG-01",
-      "units": "5",
-      "description": "this is a description for Digital stock"
-    }
-  },
-  {
     "model": "dashboard.process",
     "pk": 1,
     "fields": {

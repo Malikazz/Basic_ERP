@@ -5,9 +5,17 @@ from django.forms import DateField
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 from django.dispatch import receiver
+from inventory.models import Material
+
+from inventory.models import MaterialInventory
+from inventory.models import MerchantMaterials
+from inventory.models import MaterialsOnOrder
+from inventory.models import Merchant
 
 # TODO: Need to test the one drive api to see how this works
 # https://docs.microsoft.com/en-us/graph/api/resources/onedrive?view=graph-rest-1.0
+
+
 class OrderDocument(models.Model):
     name = models.CharField(max_length=255)
     file_location = models.FileField()
@@ -27,37 +35,14 @@ class OrderImage(models.Model):
         return self.name
 
 
-class Merchant(models.Model):
-    company_name = models.CharField(max_length=75)
-    contact_name = models.CharField(max_length=75)
-    contact_email = models.EmailField(null=True, blank=True)
-    contact_number = PhoneNumberField()
-    address = models.CharField(max_length=255)
+# class Material(models.Model):
+   # name = models.CharField(max_length=55)
+   # material_code = models.CharField(max_length=255, unique=True)
+    #description = models.CharField(max_length=255, null=True, blank=True)
+    #unit_measurement = models.CharField(max_length=255)
 
-    def __str__(self):
-        self.company_name
-
-
-class Material(models.Model):
-    name = models.CharField(max_length=55)
-    material_code = models.CharField(max_length=255, unique=True)
-    units = models.IntegerField()
-    unit_measurement = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-
-class MerchantMaterials(models.Model):
-    material = models.ForeignKey(Material, on_delete=models.CASCADE)
-    merchant_id = models.ForeignKey(Merchant, on_delete=models.CASCADE)
-    unit_cost = models.DecimalField(max_digits=6, decimal_places=2)
-    purchase_date = models.DateField()
-    units_on_order = models.IntegerField
-    po = models.CharField(max_length=100)
-    merchant_material_code = models.CharField(max_length=100, blank=True, null=True)
-    merchant_unit_measurement = models.CharField(max_length=50, blank=True, null=True)
+    # def __str__(self):
+        # return self.name
 
 
 class Process(models.Model):
@@ -81,8 +66,10 @@ class Customer(models.Model):
 
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
-    order_materials = models.ForeignKey(Material, on_delete=models.PROTECT, null=True)
-    order_process = models.ForeignKey(Process, on_delete=models.PROTECT, null=True)
+    order_materials = models.ForeignKey(
+        Material, on_delete=models.PROTECT, null=True)
+    order_process = models.ForeignKey(
+        Process, on_delete=models.PROTECT, null=True)
     order_tags = models.ManyToManyField(Group)
     order_documents = models.ManyToManyField(OrderDocument, blank=True)
     order_images = models.ManyToManyField(OrderImage, blank=True)
@@ -93,7 +80,8 @@ class Order(models.Model):
     approved_by = models.CharField(max_length=80, blank=True, null=True)
     approval_date = models.DateTimeField(blank=True, null=True)
     due_date = models.DateTimeField(blank=True, null=True)
-    quote = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    quote = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True)
     po_number = models.CharField(max_length=255, blank=True, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     order_creator = models.ForeignKey(User, on_delete=models.PROTECT)
