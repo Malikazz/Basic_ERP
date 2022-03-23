@@ -38,9 +38,19 @@
   </tbody>
 </table>
 <script>
-
+  // The column option is setting which colmuns are serachable
+  // This corosponds to OrderId, OrderName, OrderTags being searchable
   $(document).ready(function () {
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({
+      "columns": [
+        null,
+        null,
+        null,
+        { "searchable": false },
+        { "searchable": false },
+        { "searchable": false }
+      ]
+    });
   });
 </script>
 
