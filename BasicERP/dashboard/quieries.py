@@ -1,5 +1,5 @@
 from typing import List, Dict, Tuple
-from .models import Order, OrderImage, OrderDocument, Customer
+from .models import ApplicationSettings, Order, OrderImage, OrderDocument, Customer
 from django.contrib.auth.models import User, Group
 from django.db.models import Q
 from django.db import transaction
@@ -114,3 +114,13 @@ def remove_delete_image(order_id: int, image_id: int) -> None:
 
 def get_customer(order_id: int) -> Customer:
     return Order.objects.get(pk=order_id).customer
+
+
+def get_application_settings() -> ApplicationSettings:
+    return ApplicationSettings.objects.get(pk=1)
+
+
+def get_users_by_order(order: Order) -> List[User]:
+    order_tags = order.order_tags.all()
+    user_list = list(User.objects.filter(groups__in=order_tags))
+    return user_list

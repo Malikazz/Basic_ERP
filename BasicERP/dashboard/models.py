@@ -128,3 +128,7 @@ class ApplicationSettings(models.Model):
     """Stores application wide settings"""
 
     send_new_order_emails = models.BooleanField(default=True)
+    send_new_user_emails = models.BooleanField(default=True)
+
+    def __str__(self):
+        return "Application Settings Do NOT DELETE"

@@ -20,13 +20,15 @@ from .quieries import (
     remove_delete_image,
     get_customer,
 )
-from .models import Order, OrderDocument, OrderImage
+from .notifications import new_order_email
+from .models import ApplicationSettings, Order, OrderDocument, OrderImage
 from itertools import zip_longest
 from .forms import OrderForm, OrderImageForm, OrderDocumentForm
 
 # Create your views here.
 @login_required
 def index(request):
+    new_order_email(Order.objects.get(pk=1))
     orders_list = get_orders_by_user_role(request.user)
     orders = []
     for order in orders_list:

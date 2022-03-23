@@ -1,8 +1,10 @@
 <html>
 
-<h3>New Order</h3>
-<p>There is a new order in your domain Order Number: {{ order.id }}. <a href="{{order.link}}">Order link</a></p>
-<p>Creator: {{ order_creator }} Created Date: {{order.created_at}} Due Date: {{order.due_date}}</p>
+<h3>New Order {{order.order_name}}</h3>
+<p>There is a new order in your domain Order Number: {{ order.id }}. <a
+    href="{{ request.scheme }}://{{ request.get_host }}{% url 'dashboard:view-order' order_id=order.id %}">Order
+    link</a></p>
+<p>Creator: {{ order.order_creator }} Created Date: {{order.created_at}} Due Date: {{order.due_date}}</p>
 <p>Customer: {{ order.customer }}</p>
 
 </html>
