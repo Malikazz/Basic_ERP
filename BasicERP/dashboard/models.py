@@ -122,3 +122,9 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.file_location:
         if os.path.isfile(instance.file_location.path):
             os.remove(instance.file_location.path)
+
+
+class ApplicationSettings(models.Model):
+    """Stores application wide settings"""
+
+    send_new_order_emails = models.BooleanField(default=True)

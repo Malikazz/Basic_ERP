@@ -6,7 +6,6 @@ from django.http import HttpResponseForbidden, HttpResponseNotAllowed, JsonRespo
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
 from .quieries import (
     get_orders_by_user_role,
     create_order_images_from_post,
