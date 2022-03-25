@@ -18,16 +18,16 @@
   </thead>
   <tbody>
       {% if material %}
-    <tr>
-      <td>{{material.material_id}}</td>
-      <td>{{material.units_available}}</td>
-      <td>{{material.units_defective}}</td>
-      <td>{{material.units_reserved_for_orders}}</td>
-      <td>{{material.total_units_on_order}}</td>
-      <td>
-       
-      </td>
-    </tr>
+      {% for material in material %}
+      <tr>
+        <td>{{material.material_code}}</td>
+        <td>{{material.units_available}}</td>
+        <td>{{material.units_defective}}</td>
+        <td>{{material.units_reserved_for_orders}}</td>
+        <td>{{material.total_units_on_order}}</td>
+        
+      </tr>
+      {% endfor %}
     {% endif %}
   </tbody>
 </table>
