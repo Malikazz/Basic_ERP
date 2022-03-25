@@ -10,10 +10,9 @@ def get_all_inventory() -> list:
     return all_inventory
 
 
-def get_inventory_by_code(request_material_code) -> list:
-    material = list(
-        MaterialInventory.objects.filter(material_code=request_material_code)
-    )
+def get_inventory_by_code(request_material_code) -> MaterialInventory:
+    material = MaterialInventory.objects.filter(
+        material_code=request_material_code)
     return material
 
 
