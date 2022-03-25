@@ -1,0 +1,16 @@
+<h1> material for </h1>
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+<body>
+   
+<h1> Please enter merchant details</h1>
+<form method=post  enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <input class="btn btn-primary mt-2" type="submit" name="create_material_order" value="Create"> </input>
+</form>
+</body>
+  

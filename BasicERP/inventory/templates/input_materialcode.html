@@ -1,0 +1,12 @@
+<h1> Enter the material code</h1>
+<form action="/inventory/view_material/" method=post  enctype="multipart/form-data">
+    {% csrf_token %}
+<input type=text maxlength=255 id=material_code name="material_code">
+{%if Error %}
+<h6 color=red>{{Error}}</h6>
+{% endif %}
+<button type=submit> submit </button>
+<!--<input class="btn btn-primary mt-2" type="submit" name="view_by_material_code" value="submit" > </input>
+-->
+</form>
+  

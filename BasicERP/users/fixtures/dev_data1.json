@@ -1,57 +1,290 @@
 [
-    {
-        "model": "inventory.material",
-        "pk": 1,
-        "fields": {
-            "name": "Crezone",
-            "material_code": "CRE-01",
-            "units": "5",
-            "description": "this is a description for Crezone",
-            "status": "True"
-        }
-    },
-    {
-        "model": "inventory.material",
-        "pk": 2,
-        "fields": {
-            "name": "Corex",
-            "material_code": "COR-01",
-            "units": "5",
-            "description": "this is a description for Corex",
-            "status": "True"
-        }
-    },
-    {
-        "model": "inventory.material",
-        "pk": 3,
-        "fields": {
-            "name": "Foamboard",
-            "material_code": "FOA-01",
-            "units": "5",
-            "description": "this is a description for Foamboard",
-            "status": "True"
-        }
-    },
-    {
-        "model": "inventory.material",
-        "pk": 4,
-        "fields": {
-            "name": "Banner stock",
-            "material_code": "BAN-01",
-            "units": "5",
-            "description": "this is a description for Banner stock",
-            "status": "True"
-        }
-    },
-    {
-        "model": "inventory.material",
-        "pk": 5,
-        "fields": {
-            "name": "Digital stock",
-            "material_code": "DIG-01",
-            "units": "5",
-            "description": "this is a description for Digital stock",
-            "status": "True"
-        }
+  {
+    "model": "inventory.material",
+    "pk": 1,
+    "fields": {
+      "name": "Crezone",
+      "material_code": "CRE-01",
+      "units": "5",
+      "description": "this is a description for Crezone",
+      "status": "True"
     }
+  },
+  {
+    "model": "inventory.material",
+    "pk": 2,
+    "fields": {
+      "name": "Corex",
+      "material_code": "COR-01",
+      "units": "5",
+      "description": "this is a description for Corex",
+      "status": "True"
+    }
+  },
+  {
+    "model": "inventory.material",
+    "pk": 3,
+    "fields": {
+      "name": "Foamboard",
+      "material_code": "FOA-01",
+      "units": "5",
+      "description": "this is a description for Foamboard",
+      "status": "True"
+    }
+  },
+  {
+    "model": "inventory.material",
+    "pk": 4,
+    "fields": {
+      "name": "Banner stock",
+      "material_code": "BAN-01",
+      "units": "5",
+      "description": "this is a description for Banner stock",
+      "status": "True"
+    }
+  },
+  {
+    "model": "inventory.MerchantMaterials",
+    "pk": 5,
+    "fields": {
+      "material_id": "Digital stock",
+      "unit_cost": "DIG-01",
+      "avg_order_processing_time": "5",
+      "merchant_material_code": "this is a description for Digital stock",
+      "merchant_unit_measurement": "this",
+      "status": "True"
+    }
+  },
+  {
+    "model": "inventory.MerchantMaterials",
+    "pk": 5,
+    "fields": {
+      "material_id": 123,
+      "unit_cost": 1223,
+      "avg_order_processing_time": 5,
+      "merchant_material_code": "this is a description for Digital stock",
+      "merchant_unit_measurement": "this"
+    }
+  },
+  [
+    {
+      "model": "auth.group",
+      "pk": 1,
+      "fields": {
+        "name": "Managing Director"
+      }
+    },
+    {
+      "model": "auth.group",
+      "pk": 2,
+      "fields": {
+        "name": "Inventory Manager"
+      }
+    },
+    {
+      "model": "auth.group",
+      "pk": 3,
+      "fields": {
+        "name": "Production Manager"
+      }
+    },
+    {
+      "model": "auth.group",
+      "pk": 4,
+      "fields": {
+        "name": "Sales"
+      }
+    },
+    {
+      "model": "auth.group",
+      "pk": 5,
+      "fields": {
+        "name": "Production Staff"
+      }
+    },
+    {
+      "model": "auth.group",
+      "pk": 6,
+      "fields": {
+        "name": "Designer"
+      }
+    },
+    {
+      "model": "auth.user",
+      "pk": 1,
+      "fields": {
+        "first_name": "Perry",
+        "last_name": "Platypus",
+        "email": "PerryP@test.com",
+        "is_staff": true,
+        "password": "the-pass-word-01",
+        "username": "PerryP",
+        "is_superuser": true,
+        "groups": [
+          1
+        ]
+      }
+    },
+    {
+      "model": "auth.user",
+      "pk": 2,
+      "fields": {
+        "first_name": "Phineas",
+        "last_name": "Flynn",
+        "email": "PhineasF@test.com",
+        "password": "the-pass-word-01",
+        "is_staff": true,
+        "username": "PhineasF",
+        "groups": [
+          2
+        ]
+      }
+    },
+    {
+      "model": "auth.user",
+      "pk": 3,
+      "fields": {
+        "first_name": "Ferb",
+        "last_name": "Fletcher",
+        "email": "FerbF@test.com",
+        "password": "the-pass-word-01",
+        "is_staff": true,
+        "username": "FerbF",
+        "groups": [
+          3
+        ]
+      }
+    },
+    {
+      "model": "auth.user",
+      "pk": 4,
+      "fields": {
+        "first_name": "Heinz",
+        "last_name": "Doofenshmirtz",
+        "password": "the-pass-word-01",
+        "email": "HeinzD@test.com",
+        "username": "HeinzD",
+        "groups": [
+          4
+        ]
+      }
+    },
+    {
+      "model": "auth.user",
+      "pk": 5,
+      "fields": {
+        "first_name": "Candace",
+        "last_name": "Fylnn",
+        "email": "CandiceF@test.com",
+        "password": "the-pass-word-01",
+        "username": "CandiceF",
+        "groups": [
+          5
+        ]
+      }
+    },
+    {
+      "model": "auth.user",
+      "pk": 6,
+      "fields": {
+        "first_name": "Baljeet",
+        "last_name": "Tjinder",
+        "email": "BaljeetT@test.com",
+        "password": "the-pass-word-01",
+        "username": "BaljeetT",
+        "groups": [
+          6
+        ]
+      }
+    },
+    {
+      "model": "dashboard.orderimage",
+      "pk": 1,
+      "fields": {
+        "name": "Some Image",
+        "image_location": "https://via.placeholder.com/150"
+      }
+    },
+    {
+      "model": "dashboard.orderimage",
+      "pk": 2,
+      "fields": {
+        "name": "Some Image 2",
+        "image_location": "https://via.placeholder.com/150"
+      }
+    },
+    {
+      "model": "dashboard.orderimage",
+      "pk": 3,
+      "fields": {
+        "name": "Some Image 3",
+        "image_location": "https://via.placeholder.com/150"
+      }
+    },
+    {
+      "model": "dashboard.process",
+      "pk": 1,
+      "fields": {
+        "name": "Vinyl graphic",
+        "description": "This is a description"
+      }
+    },
+    {
+      "model": "dashboard.process",
+      "pk": 2,
+      "fields": {
+        "name": "Digital print",
+        "description": "This is a description"
+      }
+    },
+    {
+      "model": "dashboard.process",
+      "pk": 3,
+      "fields": {
+        "name": "Silkscreening",
+        "description": "This is a description"
+      }
+    },
+    {
+      "model": "dashboard.process",
+      "pk": 4,
+      "fields": {
+        "name": "Other",
+        "description": "This is a description"
+      }
+    },
+    {
+      "model": "dashboard.customer",
+      "pk": 1,
+      "fields": {
+        "customer_name": "Exxon-Mobile",
+        "address": "155-15555 Edmonton, Alberta, T6J2N8",
+        "phone": "17805555555ex44",
+        "email_contact": "tester@exxm.com",
+        "fax": "17805555555ex44"
+      }
+    },
+    {
+      "model": "inventory.MerchantMaterials",
+      "pk": 5,
+      "fields": {
+        "material_id": 123,
+        "unit_cost": 1223,
+        "avg_order_processing_time": 5,
+        "merchant_material_code": "this is a description for Digital stock",
+        "merchant_unit_measurement": "this"
+      }
+    },
+    {
+      "model": "inventory.material",
+      "pk": 4,
+      "fields": {
+        "name": "Banner stock",
+        "material_code": "BAN-01",
+        "units": "5",
+        "description": "this is a description for Banner stock",
+        "status": "True"
+      }
+    }
+  ]
 ]

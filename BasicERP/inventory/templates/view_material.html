@@ -17,16 +17,18 @@
     </tr>
   </thead>
   <tbody>
-    {% for material in material %}
+      {% if material %}
     <tr>
-      <td>{{material.id}}</td>
+      <td>{{material.material_id}}</td>
       <td>{{material.units_available}}</td>
       <td>{{material.units_defective}}</td>
       <td>{{material.units_reserved_for_orders}}</td>
       <td>{{material.total_units_on_order}}</td>
-      
+      <td>
+       
+      </td>
     </tr>
-    {% endfor %}
+    {% endif %}
   </tbody>
 </table>
 {% endblock %}

@@ -5,8 +5,6 @@ from django.forms import DateField
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from inventory.models import Material
-
 from inventory.models import MaterialInventory
 from inventory.models import MerchantMaterials
 from inventory.models import MaterialsOnOrder
@@ -67,7 +65,7 @@ class Customer(models.Model):
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
     order_materials = models.ForeignKey(
-        Material, on_delete=models.PROTECT, null=True)
+        MaterialInventory, on_delete=models.PROTECT, null=True)
     order_process = models.ForeignKey(
         Process, on_delete=models.PROTECT, null=True)
     order_tags = models.ManyToManyField(Group)

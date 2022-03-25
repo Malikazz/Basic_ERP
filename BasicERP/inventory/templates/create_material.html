@@ -1,0 +1,7 @@
+<h1> Please enter material details</h1>
+<form method=post  enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <input class="btn btn-primary mt-2" type="submit" name="create_material" value="Create"> </input>
+</form>
+  

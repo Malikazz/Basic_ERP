@@ -9,7 +9,8 @@ def _get_order_and_related_data(user: User, orders: dict) -> None:
     """Adds any orders and related data found to orders dict uses the `order.id` to prevent duplicate data"""
     user_groups = _get_all_users_groups(user)
     order_list = list(
-        Order.objects.filter(Q(order_tags__pk__in=user_groups) & Q(archived=False))
+        Order.objects.filter(
+            Q(order_tags__pk__in=user_groups) & Q(archived=False))
         .prefetch_related("order_documents")
         .prefetch_related("order_images")
         .prefetch_related("order_tags")
@@ -45,7 +46,8 @@ def get_orders_by_user_role(user: User) -> Dict[str, Dict[str, object]]:
 def create_order_images_from_post(item_list: list) -> List[OrderImage]:
     images = []
     for image in item_list:
-        images.append(OrderImage.objects.create(name=image._name, image_location=image))
+        images.append(OrderImage.objects.create(
+            name=image._name, image_location=image))
     return images
 
 
@@ -90,9 +92,7 @@ def get_order_by_pk(pk: int) -> Order:
     return Order.objects.get(pk=pk)
 
 
-def get_order_images_documents(
-    order_id: int,
-) -> Tuple[Order, OrderImage, OrderDocument]:
+def get_order_images_documents(order_id: int) -> Tuple[Order, OrderImage, OrderDocument]:
     order = Order.objects.get(pk=order_id)
     images = list(order.order_images.all())
     documents = list(order.order_documents.all())
