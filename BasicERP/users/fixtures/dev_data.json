@@ -200,57 +200,14 @@
     "model": "inventory.MaterialInventory",
     "pk": 1,
     "fields": {
-      "name": "Crezone",
-      "material_code": "CRE-01",
-      "description": "this is a description for Crezone",
-      "units_measurement": "inches",
-      "units_available": "6",
-      "units_reserve_for_orders": "10",
-      "units_defective": "0",
-      "total_units_on_order": "1",
-      "archive": "False"
-    }
-  },
-  {
-    "model": "inventory.MaterialInventory",
-    "pk": 2,
-    "fields": {
-      "name": "Corex",
-      "material_code": "COR-01",
-      "units_available": "5",
-      "units_reserve_for_orders": "1",
-      "units_defective": "0",
-      "total_units_on_order": "1",
-      "description": "this is a description for Corex",
-      "archive": "False"
-    }
-  },
-  {
-    "model": "inventory.MaterialInventory",
-    "pk": 3,
-    "fields": {
-      "name": "Foamboard",
-      "material_code": "FOA-01",
-      "units_available": "5",
-      "units_reserve_for_orders": "1",
-      "units_defective": "0",
-      "total_units_on_order": "1",
-      "description": "this is a description for Foamboard",
-      "archive": "False"
-    }
-  },
-  {
-    "model": "inventory.MaterialInventory",
-    "pk": 4,
-    "fields": {
       "name": "Banner stock",
       "material_code": "BAN-01",
-      "units_available": "5",
-      "units_reserve_for_orders": "1",
-      "units_defective": "0",
-      "total_units_on_order": "1",
+      "units_available": 5,
+      "units_reserve_for_orders": 1,
+      "units_defective": 0,
+      "total_units_on_order": 1,
       "description": "this is a description hello for Banner stock",
-      "archive": "False"
+      "archive": false
     }
   }
 ]
