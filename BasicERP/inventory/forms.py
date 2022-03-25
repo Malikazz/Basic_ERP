@@ -21,7 +21,7 @@ class MaterialInventoryForm(ModelForm):
             "name",
             "material_code",
             "description",
-            "unit_measurement",
+            "units_measurement",
             "units_available",
             "units_reserved_for_orders",
             "units_defective",

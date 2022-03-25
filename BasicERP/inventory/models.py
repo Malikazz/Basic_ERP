@@ -11,7 +11,7 @@ from django.dispatch import receiver
 
 
 class Merchant(models.Model):
-    merchant_code = models.IntegerField(unique=True)
+    merchant_code = models.CharField(max_length=75, unique=True)
     company_name = models.CharField(max_length=75)
     contact_name = models.CharField(max_length=75)
     contact_role = models.CharField(max_length=50)
@@ -28,7 +28,7 @@ class MaterialInventory(models.Model):
     name = models.CharField(max_length=55)
     material_code = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, null=True, blank=True)
-    unit_measurement = models.CharField(max_length=255)
+    units_measurement = models.CharField(max_length=255)
     units_available = models.IntegerField()
     units_reserved_for_orders = models.IntegerField()
     units_defective = models.IntegerField()
