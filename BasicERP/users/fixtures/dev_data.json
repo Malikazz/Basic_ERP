@@ -210,7 +210,7 @@
       "total_units_on_order": "1",
       "archive": "False"
     }
-  }
+  },
   {
     "model": "inventory.MaterialInventory",
     "pk": 2,
@@ -249,8 +249,8 @@
       "units_reserve_for_orders": "1",
       "units_defective": "0",
       "total_units_on_order": "1",
-      "description": "this is a description for Banner stock",
+      "description": "this is a description hello for Banner stock",
       "archive": "False"
     }
-  },
+  }
 ]
