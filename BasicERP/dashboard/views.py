@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .quieries import (
+    get_all_process,
     get_orders_by_user_role,
     create_order_images_from_post,
     create_order_documents_from_post,
@@ -22,6 +23,8 @@ from .quieries import (
     archive_material,
     get_material_by_id,
     get_all_materials,
+    get_process_by_id,
+    archive_process,
 )
 from dashboard.models import (
     ApplicationSettings,
@@ -29,9 +32,16 @@ from dashboard.models import (
     OrderDocument,
     OrderImage,
     Material,
+    Process,
 )
 from itertools import zip_longest
-from .forms import MaterialForm, OrderForm, OrderImageForm, OrderDocumentForm
+from dashboard.forms import (
+    MaterialForm,
+    OrderForm,
+    OrderImageForm,
+    OrderDocumentForm,
+    ProcessForm,
+)
 
 
 @login_required
@@ -227,3 +237,45 @@ def edit_material(request, material_id):
         messages.warning(request, "that material does not exsist")
         return redirect("/inventory/")
     return render(request, "dashboard/edit_material.html", {"form": form})
+
+
+@login_required
+def create_process(request):
+    if request.method == "POST":
+        form = ProcessForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Process has been added")
+    else:
+        form = MaterialForm()
+    return render(request, "dashboard/create_process.html", {"form": form})
+
+
+@login_required
+def view_processes(request):
+    processes = get_all_process()
+    return render(request, "dashboard/view_processes.html", {"processes": processes})
+
+
+@login_required
+def edit_process(request, process_id):
+    try:
+        process = get_process_by_id(process_id)
+        if request.method == "POST":
+            if request.POST.get("update"):
+                form = ProcessForm(request.POST, instance=process)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, "Process updated")
+                    return redirect("/view-processes/")
+            elif request.POST.get("archive"):
+                archive_process(process)
+                messages.success(request, "Process Archived")
+                return redirect("/view-processes/")
+        else:
+            form = ProcessForm(instance=process)
+
+    except Material.DoesNotExist:
+        messages.warning(request, "that prcoess does not exsist")
+        return redirect("/view-processes/")
+    return render(request, "dashboard/edit_process.html", {"form": form})

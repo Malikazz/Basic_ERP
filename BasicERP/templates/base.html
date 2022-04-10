@@ -31,8 +31,21 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'dashboard:index' %}">Dashboard</span></a>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            View
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="{% url 'dashboard:index'%}">View Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:view-materials'%}">View Materials</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:view-processes'%}">View Processes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:index'%}">View Merchants</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <div class="dropdown">

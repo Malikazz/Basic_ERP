@@ -6,6 +6,7 @@ from .models import (
     OrderImage,
     OrderDocument,
     Customer,
+    Process,
 )
 from django.contrib.auth.models import User, Group
 from django.db.models import Q
@@ -145,3 +146,17 @@ def get_material_by_id(material_id: int) -> Material:
 
 def get_all_materials() -> List[Material]:
     return list(Material.objects.all())
+
+
+def get_all_process() -> List[Process]:
+    return list(Process.objects.all())
+
+
+def get_process_by_id(process_id: int) -> Process:
+    return Process.objects.get(pk=process_id)
+
+
+def archive_process(process: Process) -> Process:
+    process = Process.objects.get(pk=process.id)
+    process.archived = True
+    return process.save()
