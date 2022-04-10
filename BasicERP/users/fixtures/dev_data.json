@@ -245,5 +245,10 @@
       "email_contact": "tester@exxm.com",
       "fax": "17805555555ex44"
     }
+  },
+  {
+    "model": "dashboard.applicationsettings",
+    "pk": 1,
+    "fields": {}
   }
 ]

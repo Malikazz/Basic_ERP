@@ -1,0 +1,13 @@
+
+Order: {{order.order_name}}
+
+There is a new order in your domain Order Number: {{ order.id }}.
+{{uri}}{% url 'dashboard:view-order' order_id=order.id %}">
+
+Creator: {{ order.order_creator }} 
+
+Created Date: {{order.created_at}} 
+
+Due Date: {{order.due_date}}
+
+Customer: {{ order.customer }}
