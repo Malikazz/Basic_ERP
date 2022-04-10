@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+{{ order_form.media }}
+{% endblock %}
+{% block content %}
+<h1 class="text-center">Modify Material</h1>
+<div class="d-flex justify-content-center flex-wrap">
+  <input class="d-none" value="{{order_id}}" id="order_id"></input>
+  <form class="col-md-6" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary mt-2" type="submit" name="update_material" value="Update"> </input>
+    <input class="btn btn-info mt-2" type="submit" name="archive_material" value="archive"> </input>
+  </form>
+</div>
+</div>
+{% endblock %}

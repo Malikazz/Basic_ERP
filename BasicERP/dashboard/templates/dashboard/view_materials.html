@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<table id="myTable" data-order='[[ 0, "asc" ]]' data-page-length='25'>
+  <thead>
+    <tr>
+      <th>Material ID</th>
+      <th>Material Name</th>
+      <th>Material Code</th>
+      <th>Units</th>
+      <th>Units Measurement</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in materials %}
+    <tr>
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.material_code}}</td>
+      <td>{{item.units}}</td>
+      <td>{{item.unit_measurement}}</td>
+      <td>
+        <a class="btn btn-secondary" href="{% url 'dashboard:edit-material' item.id %}">Edit</a>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+<script>
+  // The column option is setting which colmuns are serachable
+  // This corosponds to OrderId, OrderName, OrderTags being searchable
+  $(document).ready(function () {
+    $('#myTable').DataTable({
+      "columns": [
+        null,
+        null,
+        null,
+        { "searchable": false },
+        { "searchable": false },
+        { "searchable": false }
+      ]
+    });
+  });
+</script>
+
+{% endblock %}

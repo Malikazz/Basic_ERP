@@ -19,12 +19,21 @@ from .quieries import (
     get_order_images_documents,
     remove_delete_image,
     get_customer,
+    archive_material,
+    get_material_by_id,
+    get_all_materials,
 )
-from .models import ApplicationSettings, Order, OrderDocument, OrderImage
+from dashboard.models import (
+    ApplicationSettings,
+    Order,
+    OrderDocument,
+    OrderImage,
+    Material,
+)
 from itertools import zip_longest
-from .forms import OrderForm, OrderImageForm, OrderDocumentForm
+from .forms import MaterialForm, OrderForm, OrderImageForm, OrderDocumentForm
 
-# Create your views here.
+
 @login_required
 def index(request):
     orders_list = get_orders_by_user_role(request.user)
@@ -176,3 +185,45 @@ def view_order(request, order_id):
         "order_creator": order.order_creator,
     }
     return render(request, "dashboard/view_order.html", context=context)
+
+
+@login_required
+def create_material(request):
+    if request.method == "POST":
+        form = MaterialForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Material has been added")
+    else:
+        form = MaterialForm()
+    return render(request, "dashboard/create_material.html", {"form": form})
+
+
+@login_required
+def view_materials(request):
+    materials = get_all_materials()
+    return render(request, "dashboard/view_materials.html", {"materials": materials})
+
+
+@login_required
+def edit_material(request, material_id):
+    try:
+        material = get_material_by_id(material_id)
+        if request.method == "POST":
+            if request.POST.get("update_material"):
+                form = MaterialForm(request.POST, instance=material)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, "Material updated")
+                    return redirect("/inventory/")
+            elif request.POST.get("archive_material"):
+                archive_material(material)
+                messages.success(request, "Material Archived")
+                return redirect("/inventory/")
+        else:
+            form = MaterialForm(instance=material)
+
+    except Material.DoesNotExist:
+        messages.warning(request, "that material does not exsist")
+        return redirect("/inventory/")
+    return render(request, "dashboard/edit_material.html", {"form": form})

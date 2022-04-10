@@ -1,6 +1,6 @@
 from django.forms import CharField, HiddenInput, ModelForm
 from django import forms
-from .models import Order, OrderDocument, OrderImage
+from .models import Order, OrderDocument, OrderImage, Material
 from django.contrib.auth.models import Group
 from tinymce.widgets import TinyMCE
 
@@ -51,3 +51,9 @@ class OrderImageForm(forms.Form):
         required=False,
         widget=forms.ClearableFileInput(attrs={"multiple": True, "required": False}),
     )
+
+
+class MaterialForm(ModelForm):
+    class Meta:
+        model = Material
+        fields = "__all__"

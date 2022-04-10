@@ -1,5 +1,12 @@
 from typing import List, Dict, Tuple
-from .models import ApplicationSettings, Order, OrderImage, OrderDocument, Customer
+from .models import (
+    ApplicationSettings,
+    Material,
+    Order,
+    OrderImage,
+    OrderDocument,
+    Customer,
+)
 from django.contrib.auth.models import User, Group
 from django.db.models import Q
 from django.db import transaction
@@ -124,3 +131,17 @@ def get_users_by_order(order: Order) -> List[User]:
     order_tags = order.order_tags.all()
     user_list = list(User.objects.filter(groups__in=order_tags))
     return user_list
+
+
+def archive_material(material: Material) -> Material:
+    material = Material.objects.get(pk=material.id)
+    material.archived = True
+    return material.save()
+
+
+def get_material_by_id(material_id: int) -> Material:
+    return Material.objects.get(pk=material_id)
+
+
+def get_all_materials() -> List[Material]:
+    return list(Material.objects.all())
