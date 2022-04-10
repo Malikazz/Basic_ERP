@@ -28,7 +28,7 @@ from .forms import OrderForm, OrderImageForm, OrderDocumentForm
 # Create your views here.
 @login_required
 def index(request):
-    new_order_email(Order.objects.get(pk=1))
+    new_order_email(Order.objects.get(pk=1), request)
     orders_list = get_orders_by_user_role(request.user)
     orders = []
     for order in orders_list:
