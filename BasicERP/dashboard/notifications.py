@@ -5,7 +5,8 @@ from dashboard.quieries import get_application_settings, get_users_by_order
 from django.template.loader import render_to_string
 
 ## TODO: This module should be setup with tasks once a task system is created
-## As it could hang the application in large volumns
+## As it could hang the application in large volumns could be done in signals
+## as well possibly.
 
 
 def new_user_email(user: User) -> None:
