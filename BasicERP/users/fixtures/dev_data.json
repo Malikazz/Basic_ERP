@@ -130,37 +130,14 @@
     }
   },
   {
-    "model": "dashboard.orderimage",
-    "pk": 1,
-    "fields": {
-      "name": "Some Image",
-      "image_location": "https://via.placeholder.com/150"
-    }
-  },
-  {
-    "model": "dashboard.orderimage",
-    "pk": 2,
-    "fields": {
-      "name": "Some Image 2",
-      "image_location": "https://via.placeholder.com/150"
-    }
-  },
-  {
-    "model": "dashboard.orderimage",
-    "pk": 3,
-    "fields": {
-      "name": "Some Image 3",
-      "image_location": "https://via.placeholder.com/150"
-    }
-  },
-  {
     "model": "dashboard.material",
     "pk": 1,
     "fields": {
       "name": "Crezone",
       "material_code": "CRE-01",
       "units": "5",
-      "description": "this is a description for Crezone"
+      "description": "this is a description for Crezone",
+      "unit_measurement": "m2"
     }
   },
   {
@@ -170,7 +147,8 @@
       "name": "Corex",
       "material_code": "COR-01",
       "units": "5",
-      "description": "this is a description for Corex"
+      "description": "this is a description for Corex",
+      "unit_measurement": "m2"
     }
   },
   {
@@ -180,7 +158,8 @@
       "name": "Foamboard",
       "material_code": "FOA-01",
       "units": "5",
-      "description": "this is a description for Foamboard"
+      "description": "this is a description for Foamboard",
+      "unit_measurement": "m2"
     }
   },
   {
@@ -190,7 +169,8 @@
       "name": "Banner stock",
       "material_code": "BAN-01",
       "units": "5",
-      "description": "this is a description for Banner stock"
+      "description": "this is a description for Banner stock",
+      "unit_measurement": "m2"
     }
   },
   {
@@ -200,7 +180,8 @@
       "name": "Digital stock",
       "material_code": "DIG-01",
       "units": "5",
-      "description": "this is a description for Digital stock"
+      "description": "this is a description for Digital stock",
+      "unit_measurement": "m2"
     }
   },
   {
