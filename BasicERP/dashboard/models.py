@@ -6,8 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 
-# TODO: Need to test the one drive api to see how this works
-# https://docs.microsoft.com/en-us/graph/api/resources/onedrive?view=graph-rest-1.0
+
 class OrderDocument(models.Model):
     name = models.CharField(max_length=255)
     file_location = models.FileField()
