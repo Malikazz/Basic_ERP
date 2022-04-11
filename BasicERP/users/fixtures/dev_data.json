@@ -231,5 +231,38 @@
     "model": "dashboard.applicationsettings",
     "pk": 1,
     "fields": {}
+  },
+  {
+    "model": "dashboard.merchant",
+    "pk": 1,
+    "fields": {
+      "company_name": "Bobs Ink Supply",
+      "contact_name": "Bob",
+      "contact_email": "Bob@bis.com",
+      "contact_number": "+17805555555",
+      "address": "155-15555 Edmonton, Alberta, T6J2N8"
+    }
+  },
+  {
+    "model": "dashboard.merchant",
+    "pk": 2,
+    "fields": {
+      "company_name": "Teds Paper Supply",
+      "contact_name": "Ted",
+      "contact_email": "Ted@tps.com",
+      "contact_number": "+17804444444",
+      "address": "155-15555 Edmonton, Alberta, T6J2N8"
+    }
+  },
+  {
+    "model": "dashboard.merchant",
+    "pk": 3,
+    "fields": {
+      "company_name": "Rick Sticker Supply",
+      "contact_name": "Rick",
+      "contact_email": "Rick@rss.com",
+      "contact_number": "+17803333333",
+      "address": "155-15555 Edmonton, Alberta, T6J2N8"
+    }
   }
 ]

@@ -7,7 +7,9 @@ from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .quieries import (
+    get_all_merchants,
     get_all_process,
+    get_merchant_by_id,
     get_orders_by_user_role,
     create_order_images_from_post,
     create_order_documents_from_post,
@@ -33,10 +35,12 @@ from dashboard.models import (
     OrderImage,
     Material,
     Process,
+    Merchant,
 )
 from itertools import zip_longest
 from dashboard.forms import (
     MaterialForm,
+    MerchantForm,
     OrderForm,
     OrderImageForm,
     OrderDocumentForm,
@@ -266,7 +270,7 @@ def edit_process(request, process_id):
                 form = ProcessForm(request.POST, instance=process)
                 if form.is_valid():
                     form.save()
-                    messages.success(request, "Process updated")
+                    messages.success(request, "Process Updated")
                     return redirect("/view-processes/")
             elif request.POST.get("archive"):
                 archive_process(process)
@@ -279,3 +283,45 @@ def edit_process(request, process_id):
         messages.warning(request, "that prcoess does not exsist")
         return redirect("/view-processes/")
     return render(request, "dashboard/edit_process.html", {"form": form})
+
+
+@login_required
+def create_merchant(request):
+    if request.method == "POST":
+        form = MerchantForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Merchant Created")
+            return redirect("/view-merchants/")
+    else:
+        form = MerchantForm()
+
+    return render(request, "dashboard/create_merchant.html", {"form": form})
+
+
+@login_required
+def edit_merchant(request, merchant_id):
+    try:
+        merchant = get_merchant_by_id(merchant_id)
+        if request.method == "POST":
+            form = MerchantForm(request.POST, instance=merchant)
+            if request.POST.get("update"):
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, "Merchant updated")
+                    return redirect("/view-merchants/")
+            elif request.POST.get("archive"):
+                ## TODO: finish this
+                print("archive merchant")
+        else:
+            form = MerchantForm(instance=merchant)
+    except Merchant.DoesNotExist:
+        messages.warning(request, "Merchant does not exsist")
+        return redirect("/view-merchants/")
+    return render(request, "dashboard/edit_merchant.html", {"form": form})
+
+
+@login_required
+def view_merchants(request):
+    merchants = get_all_merchants()
+    return render(request, "dashboard/view_merchants.html", {"merchants": merchants})

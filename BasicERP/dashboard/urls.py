@@ -15,5 +15,7 @@ urlpatterns = [
     path("view-processes/", views.view_processes, name="view-processes"),
     path("create-process/", views.create_process, name="create-process"),
     path("edit-process/<process_id>", views.edit_process, name="edit-process"),
-    path("create-merchant/", views.create_material, name="create-merchant"),
+    path("create-merchant/", views.create_merchant, name="create-merchant"),
+    path("edit-merchant/<merchant_id>", views.edit_merchant, name="edit-merchant"),
+    path("view-merchants/", views.view_merchants, name="view-merchants"),
 ]

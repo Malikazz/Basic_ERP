@@ -4,28 +4,26 @@
 <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 {% endblock %}
 {% block content %}
-<h1>Materials</h1>
+<h1>Merchants</h1>
 <table id="myTable" data-order='[[ 0, "asc" ]]' data-page-length='25'>
   <thead>
     <tr>
-      <th>Material ID</th>
-      <th>Material Name</th>
-      <th>Material Code</th>
-      <th>Units</th>
-      <th>Units Measurement</th>
+      <th>ID</th>
+      <th>Company Name</th>
+      <th>Contact Name</th>
+      <th>Number</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    {% for item in materials %}
+    {% for item in merchants %}
     <tr>
       <td>{{item.id}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.material_code}}</td>
-      <td>{{item.units}}</td>
-      <td>{{item.unit_measurement}}</td>
+      <td>{{item.company_name}}</td>
+      <td>{{item.contact_name}}</td>
+      <td>{{item.contact_number}}</td>
       <td>
-        <a class="btn btn-secondary" href="{% url 'dashboard:edit-material' item.id %}">Edit</a>
+        <a class="btn btn-secondary" href="{% url 'dashboard:edit-merchant' item.id %}">Edit</a>
       </td>
     </tr>
     {% endfor %}

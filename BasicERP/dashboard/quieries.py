@@ -2,11 +2,13 @@ from typing import List, Dict, Tuple
 from .models import (
     ApplicationSettings,
     Material,
+    Merchant,
     Order,
     OrderImage,
     OrderDocument,
     Customer,
     Process,
+    MerchantMaterials,
 )
 from django.contrib.auth.models import User, Group
 from django.db.models import Q
@@ -160,3 +162,11 @@ def archive_process(process: Process) -> Process:
     process = Process.objects.get(pk=process.id)
     process.archived = True
     return process.save()
+
+
+def get_merchant_by_id(merchant_id: int) -> Merchant:
+    return Merchant.objects.get(pk=merchant_id)
+
+
+def get_all_merchants() -> List[Merchant]:
+    return list(Merchant.objects.all())

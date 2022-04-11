@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import Group
 from django.forms import DateField
@@ -49,13 +50,12 @@ class Material(models.Model):
 
 class MerchantMaterials(models.Model):
     material = models.ForeignKey(Material, on_delete=models.CASCADE)
-    merchant_id = models.ForeignKey(Merchant, on_delete=models.CASCADE)
+    merchant = models.ForeignKey(Merchant, on_delete=models.CASCADE)
     unit_cost = models.DecimalField(max_digits=6, decimal_places=2)
-    purchase_date = models.DateField()
-    units_on_order = models.IntegerField
-    po = models.CharField(max_length=100)
+    minimum_units_on_purchase = models.IntegerField(default=0)
     merchant_material_code = models.CharField(max_length=100, blank=True, null=True)
     merchant_unit_measurement = models.CharField(max_length=50, blank=True, null=True)
+    archived = models.BooleanField(default=False)
 
 
 class Process(models.Model):
