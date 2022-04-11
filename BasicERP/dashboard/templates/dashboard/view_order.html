@@ -15,7 +15,7 @@
 </div>
 <div class="row">
   <p class="h3 text-primary">Order Info</p>
-  {% include "dashboard/component/order_printer_friendly.html" with order=order %}
+  {% include "dashboard/component/order_printer_friendly.html" with order=order materials=materials %}
 </div>
 <p class="h3 text-primary">Images</p>
 {% for item in order_images %}

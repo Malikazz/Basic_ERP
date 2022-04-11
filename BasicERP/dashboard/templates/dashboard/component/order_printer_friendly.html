@@ -1,7 +1,7 @@
 <div>
   <div class="d-flex">
     <p class="col-md-3"><b>Process</b>: {{order.order_process}}</p>
-    <p class="col-md-3"><b>Materials</b>: {{order.order_materials}}</p>
+    <p class="col-md-3"><b>Materials</b>: {% for item in materials%}{{item}}/{% endfor %}</p>
     <p class="col-md-3"><b>Created Date</b>: {{order.created_at}}</p>
     <p class="col-md-3"><b>Due Date</b>: {{order.due_date}}</p>
   </div>

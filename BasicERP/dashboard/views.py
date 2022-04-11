@@ -191,9 +191,11 @@ def remove_document(request):
 def view_order(request, order_id):
     order, order_images, order_documents = get_order_images_documents(order_id)
     customer = get_customer(order_id)
+    materials = list(order.order_materials.all())
     context = {
         "customer": customer,
         "order": order,
+        "materials": materials,
         "order_images": order_images,
         "order_documents": order_documents,
         "order_creator": order.order_creator,

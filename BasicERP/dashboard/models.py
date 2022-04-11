@@ -80,7 +80,7 @@ class Customer(models.Model):
 
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
-    order_materials = models.ForeignKey(Material, on_delete=models.PROTECT, null=True)
+    order_materials = models.ManyToManyField(Material, blank=True)
     order_process = models.ForeignKey(Process, on_delete=models.PROTECT, null=True)
     order_tags = models.ManyToManyField(Group)
     order_documents = models.ManyToManyField(OrderDocument, blank=True)
