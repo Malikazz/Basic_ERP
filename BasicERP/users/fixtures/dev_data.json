@@ -264,5 +264,65 @@
       "contact_number": "+17803333333",
       "address": "155-15555 Edmonton, Alberta, T6J2N8"
     }
+  },
+  {
+    "model": "dashboard.merchantmaterials",
+    "pk": 1,
+    "fields": {
+      "material": 1,
+      "merchant": 1,
+      "unit_cost": 50,
+      "minimum_units_on_purchase": 5,
+      "merchant_material_code": "CRE-50",
+      "merchant_unit_measurement": "m2"
+    }
+  },
+  {
+    "model": "dashboard.merchantmaterials",
+    "pk": 2,
+    "fields": {
+      "material": 1,
+      "merchant": 2,
+      "unit_cost": 45,
+      "minimum_units_on_purchase": 10,
+      "merchant_material_code": "CRE-1",
+      "merchant_unit_measurement": "m2"
+    }
+  },
+  {
+    "model": "dashboard.merchantmaterials",
+    "pk": 3,
+    "fields": {
+      "material": 2,
+      "merchant": 3,
+      "unit_cost": 100,
+      "minimum_units_on_purchase": 10,
+      "merchant_material_code": "CRO-99",
+      "merchant_unit_measurement": "m2"
+    }
+  },
+  {
+    "model": "dashboard.merchantmaterials",
+    "pk": 4,
+    "fields": {
+      "material": 2,
+      "merchant": 1,
+      "unit_cost": 85,
+      "minimum_units_on_purchase": 15,
+      "merchant_material_code": "CRO-9",
+      "merchant_unit_measurement": "m2"
+    }
+  },
+  {
+    "model": "dashboard.merchantmaterials",
+    "pk": 5,
+    "fields": {
+      "material": 3,
+      "merchant": 2,
+      "unit_cost": 100,
+      "minimum_units_on_purchase": 10,
+      "merchant_material_code": "FOA-87",
+      "merchant_unit_measurement": "m2"
+    }
   }
 ]

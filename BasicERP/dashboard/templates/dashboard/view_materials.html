@@ -25,7 +25,8 @@
       <td>{{item.units}}</td>
       <td>{{item.unit_measurement}}</td>
       <td>
-        <a class="btn btn-secondary" href="{% url 'dashboard:edit-material' item.id %}">Edit</a>
+        <a class="btn btn-primary" href="{% url 'dashboard:edit-material' item.id %}">Edit</a>
+        <a class="btn btn-secondary" href="{% url 'dashboard:view-merchant-materials' item.id %}">Order</a>
       </td>
     </tr>
     {% endfor %}

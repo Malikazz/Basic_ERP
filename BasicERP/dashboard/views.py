@@ -30,6 +30,7 @@ from .quieries import (
 )
 from dashboard.models import (
     ApplicationSettings,
+    MerchantMaterials,
     Order,
     OrderDocument,
     OrderImage,
@@ -327,3 +328,14 @@ def edit_merchant(request, merchant_id):
 def view_merchants(request):
     merchants = get_all_merchants()
     return render(request, "dashboard/view_merchants.html", {"merchants": merchants})
+
+
+@login_required
+def view_merchant_materials(request, material_id):
+    material = get_material_by_id(material_id)
+    merchant_materials = list(MerchantMaterials.objects.filter(material=material))
+    return render(
+        request,
+        "dashboard/view_material_merchant.html",
+        {"merchant_materials": merchant_materials, "material": material},
+    )

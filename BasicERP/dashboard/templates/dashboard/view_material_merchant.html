@@ -4,27 +4,29 @@
 <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 {% endblock %}
 {% block content %}
-<h1>Merchants</h1>
+<h1>Suppliers for {{material.name}}</h1>
 <table id="myTable" data-order='[[ 0, "asc" ]]' data-page-length='25'>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Company Name</th>
-      <th>Contact Name</th>
-      <th>Number</th>
-      <th>Actions</th>
+      <th>Merchant</th>
+      <th>UnitCost</th>
+      <th>Merchant Unit</th>
+      <th>Min Purchase</th>
+      <th>Merchant Code</th>
+      <th>Phone</th>
+      <th>Email</th>
     </tr>
   </thead>
   <tbody>
-    {% for item in merchants %}
+    {% for item in merchant_materials %}
     <tr>
-      <td>{{item.id}}</td>
-      <td>{{item.company_name}}</td>
-      <td>{{item.contact_name}}</td>
-      <td>{{item.contact_number}}</td>
-      <td>
-        <a class="btn btn-secondary" href="{% url 'dashboard:edit-merchant' item.id %}">Edit</a>
-      </td>
+      <td>{{item.merchant.company_name}}</td>
+      <td>{{item.unit_cost}}</td>
+      <td>{{item.merchant_unit_measurement}}</td>
+      <td>{{item.minimum_units_on_purchase}}</td>
+      <td>{{item.merchant_material_code}}</td>
+      <td>{{item.merchant.contact_number}}</td>
+      <td>{{item.merchant_contact_email}}</td>
     </tr>
     {% endfor %}
 
@@ -41,6 +43,7 @@
         null,
         { "searchable": false },
         { "searchable": false },
+        { "searchable": false }
       ]
     });
   });

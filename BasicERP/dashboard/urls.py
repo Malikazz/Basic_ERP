@@ -18,4 +18,10 @@ urlpatterns = [
     path("create-merchant/", views.create_merchant, name="create-merchant"),
     path("edit-merchant/<merchant_id>", views.edit_merchant, name="edit-merchant"),
     path("view-merchants/", views.view_merchants, name="view-merchants"),
+    path(
+        "view-merchant-materials/<material_id>",
+        views.view_merchant_materials,
+        name="view-merchant-materials",
+    ),
+    path("view-merchant/<merchant_id>", views.view_merchants, name="view-merchant"),
 ]
