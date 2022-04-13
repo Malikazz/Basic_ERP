@@ -24,5 +24,4 @@ urlpatterns = [
         name="view-merchant-materials",
     ),
     path("view-merchant/<merchant_id>", views.view_merchants, name="view-merchant"),
-    path("order-report/", views.order_report, name="order-report"),
 ]

@@ -5,6 +5,9 @@
 {% endblock %}
 {% block content %}
 <h1>Dashboard</h1>
+<div class="mt-4 mb-4">
+  {% include "dashboard/component/order_card_header.html" with order_header=order_header %}
+</div>
 <table id="myTable" data-order='[[ 0, "asc" ]]' data-page-length='25'>
   <thead>
     <tr>

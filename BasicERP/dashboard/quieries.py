@@ -13,6 +13,7 @@ from .models import (
 from django.contrib.auth.models import User, Group
 from django.db.models import Q
 from django.db import transaction
+from django.utils import timezone
 
 
 def _get_order_and_related_data(user: User, orders: dict) -> None:
@@ -170,3 +171,26 @@ def get_merchant_by_id(merchant_id: int) -> Merchant:
 
 def get_all_merchants() -> List[Merchant]:
     return list(Merchant.objects.all())
+
+
+def get_order_header() -> Dict[str, str]:
+    current_datetime = timezone.now()
+    week = current_datetime.isocalendar()[1]
+    weeks_orders = list(Order.objects.filter(created_at__week=week))
+    months_orders = list(Order.objects.filter(created_at__month=current_datetime.month))
+    weekly_count = len(weeks_orders)
+    monthly_count = len(months_orders)
+    weekly_completed = 0
+    monthly_completed = 0
+    for item in weeks_orders:
+        if item.archived == True:
+            weekly_completed = weekly_completed + 1
+    for item in months_orders:
+        if item.archived == True:
+            monthly_completed = monthly_completed + 1
+    return {
+        "week": weekly_count,
+        "month": monthly_count,
+        "week_done": weekly_completed,
+        "month_done": monthly_completed,
+    }

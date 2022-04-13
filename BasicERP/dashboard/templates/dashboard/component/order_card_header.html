@@ -1,0 +1,31 @@
+{% block content %}
+<div class="d-flex justify-content-between align-items center flex-wrap">
+  <div class="card card_basis d-flex justify-content-center align-items-center p-3 bg-info text-white">
+    <span class="h4">
+      Weeks Orders
+    </span>
+    <span class="h4">
+      {{order_header.week}}
+    </span>
+  </div>
+  <div class="card card_basis d-flex justify-content-center align-items-center p-3 bg-info text-white">
+    <span class="h4">Weeks Completed</span>
+    <span class="h4">{{order_header.week_done}}</span>
+  </div>
+  <div class="card card_basis d-flex justify-content-center align-items-center p-3 bg-info text-white">
+    <span class=" h4">Months Orders</span>
+    <span class="h4">{{order_header.month}}</span>
+  </div>
+  <div class="card  card_basis d-flex justify-content-center align-items-center p-3 bg-info text-white">
+    <span class=" h4">Months Completed</span>
+    <span class="h4">
+      {{order_header.month_done}}
+    </span>
+  </div>
+</div>
+<style>
+  .card_basis {
+    flex-basis: 20%;
+  }
+</style>
+{% endblock %}

@@ -28,6 +28,7 @@ from .quieries import (
     get_all_materials,
     get_process_by_id,
     archive_process,
+    get_order_header,
 )
 from dashboard.models import (
     ApplicationSettings,
@@ -53,6 +54,7 @@ from dashboard.forms import (
 @login_required
 def index(request):
     orders_list = get_orders_by_user_role(request.user)
+    order_header = get_order_header()
     orders = []
     for order in orders_list:
         order_tags = []
@@ -82,7 +84,11 @@ def index(request):
                 "created_at": orders_list[order]["order"].created_at,
             }
         )
-    return render(request, "dashboard/index.html", {"orders": orders})
+    return render(
+        request,
+        "dashboard/index.html",
+        {"orders": orders, "order_header": order_header},
+    )
 
 
 @login_required
@@ -339,33 +345,4 @@ def view_merchant_materials(request, material_id):
         request,
         "dashboard/view_material_merchant.html",
         {"merchant_materials": merchant_materials, "material": material},
-    )
-
-
-def order_report(request):
-
-    current_datetime = timezone.now()
-    week = current_datetime.isocalendar()[1]
-    weeks_orders = list(Order.objects.filter(created_at__week=week))
-    months_orders = list(Order.objects.filter(created_at__month=current_datetime.month))
-    weekly_count = len(weeks_orders)
-    monthly_count = len(months_orders)
-    weekly_completed = 0
-    monthly_completed = 0
-    for item in weeks_orders:
-        if item.archived == True:
-            weekly_completed = weekly_completed + 1
-    for item in months_orders:
-        if item.archived == True:
-            monthly_completed = monthly_completed + 1
-
-    return render(
-        request,
-        "dashboard/order_report.html",
-        {
-            "week": weekly_count,
-            "month": monthly_count,
-            "week_done": weekly_completed,
-            "month_done": monthly_completed,
-        },
     )
