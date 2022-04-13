@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Orders Report</h1>
+<div class="d-flex justify-content-between align-items center flex-wrap">
+  <div class="card">Weeks Orders: {{week}}</div>
+  <div class="card">Months Orders: {{month}}</div>
+  <div class="card">Weeks Completed: {{week_done}}</div>
+  <div class="card">Months Completed: {{month_done}}</div>
+</div>
+{% endblock %}

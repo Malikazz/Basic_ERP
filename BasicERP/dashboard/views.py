@@ -1,4 +1,5 @@
 import base64
+from django.utils import timezone
 from http import HTTPStatus
 from io import BytesIO
 from django.core.files.base import ContentFile
@@ -338,4 +339,33 @@ def view_merchant_materials(request, material_id):
         request,
         "dashboard/view_material_merchant.html",
         {"merchant_materials": merchant_materials, "material": material},
+    )
+
+
+def order_report(request):
+
+    current_datetime = timezone.now()
+    week = current_datetime.isocalendar()[1]
+    weeks_orders = list(Order.objects.filter(created_at__week=week))
+    months_orders = list(Order.objects.filter(created_at__month=current_datetime.month))
+    weekly_count = len(weeks_orders)
+    monthly_count = len(months_orders)
+    weekly_completed = 0
+    monthly_completed = 0
+    for item in weeks_orders:
+        if item.archived == True:
+            weekly_completed = weekly_completed + 1
+    for item in months_orders:
+        if item.archived == True:
+            monthly_completed = monthly_completed + 1
+
+    return render(
+        request,
+        "dashboard/order_report.html",
+        {
+            "week": weekly_count,
+            "month": monthly_count,
+            "week_done": weekly_completed,
+            "month_done": monthly_completed,
+        },
     )
