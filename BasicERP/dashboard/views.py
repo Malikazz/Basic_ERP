@@ -239,17 +239,17 @@ def edit_material(request, material_id):
                 if form.is_valid():
                     form.save()
                     messages.success(request, "Material updated")
-                    return redirect("/inventory/")
+                    return redirect("/view-materials/")
             elif request.POST.get("archive_material"):
                 archive_material(material)
                 messages.success(request, "Material Archived")
-                return redirect("/inventory/")
+                return redirect("/view-materials/")
         else:
             form = MaterialForm(instance=material)
 
     except Material.DoesNotExist:
         messages.warning(request, "that material does not exsist")
-        return redirect("/inventory/")
+        return redirect("/view-materials/")
     return render(request, "dashboard/edit_material.html", {"form": form})
 
 

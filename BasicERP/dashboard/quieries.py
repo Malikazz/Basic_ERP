@@ -148,11 +148,11 @@ def get_material_by_id(material_id: int) -> Material:
 
 
 def get_all_materials() -> List[Material]:
-    return list(Material.objects.all())
+    return list(Material.objects.all().filter(archived=False))
 
 
 def get_all_process() -> List[Process]:
-    return list(Process.objects.all())
+    return list(Process.objects.all().filter(archived=False))
 
 
 def get_process_by_id(process_id: int) -> Process:

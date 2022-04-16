@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "dashboard",
     "crispy_forms",
     "tinymce",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -152,9 +153,20 @@ REGISTRATION_OPEN = False
 
 ## Email;
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+## EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 
-EMAIL_FILE_PATH = "tmp/emails"
+## EMAIL_FILE_PATH = "tmp/emails"
+
+ANYMAIL = {
+    # (exact settings here depend on your ESP...)
+    "MAILGUN_API_KEY": env("MAIL_API"),
+    "MAILGUN_SENDER_DOMAIN": "malikaz.com",  # your Mailgun domain, if needed
+}
+EMAIL_BACKEND = (
+    "anymail.backends.mailgun.EmailBackend"  # or sendgrid.EmailBackend, or...
+)
+DEFAULT_FROM_EMAIL = "paul@malikaz.com"  # if you don't already have this in settings
+SERVER_EMAIL = "paul@malikaz.com"  # ditto (default from-email for Django errors)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = "/media/"

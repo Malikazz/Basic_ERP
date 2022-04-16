@@ -11,12 +11,11 @@ from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 def user_change_password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid:
-            # TODO: update user
+        if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            message.success("Your password was changed")
-            redirect(reverse("dashboard"))
+            messages.success(request, "Your password was changed")
+            return redirect("/")
         else:
             messages.error(request, "Please correct the error below.")
     else:
@@ -25,7 +24,15 @@ def user_change_password(request):
 
 
 def user_reset_password(request):
-    return render(request, "users/password_reset_form.html")
+    if request.method == "POST":
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Email has been sent")
+            return redirect("/")
+    else:
+        form = PasswordResetForm()
+    return render(request, "users/password_reset_form.html", {"form": form})
 
 
 def user_reset(request, uid, token):

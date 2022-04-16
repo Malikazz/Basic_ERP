@@ -33,7 +33,7 @@ class Merchant(models.Model):
     address = models.CharField(max_length=255)
 
     def __str__(self):
-        self.company_name
+        return self.company_name
 
 
 class Material(models.Model):
@@ -56,6 +56,9 @@ class MerchantMaterials(models.Model):
     merchant_material_code = models.CharField(max_length=100, blank=True, null=True)
     merchant_unit_measurement = models.CharField(max_length=50, blank=True, null=True)
     archived = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.merchant.company_name
 
 
 class Process(models.Model):

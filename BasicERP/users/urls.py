@@ -4,11 +4,11 @@ from . import views
 
 app_name = "users"
 urlpatterns = [
-    path("change_password", views.user_change_password, name="user_change_password"),
+    path("change-password/", views.user_change_password, name="change-password"),
     path(
-        "reset_password",
+        "reset-password",
         views.user_reset_password,
-        name="user_reset_password",
+        name="user-reset-password/",
     ),
-    path("reset_password/<uid>/<token>/", views.user_reset, name="reset"),
+    path("reset_password/<uid>/<token>", views.user_reset, name="reset"),
 ]

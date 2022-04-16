@@ -47,7 +47,7 @@
     "fields": {
       "first_name": "Perry",
       "last_name": "Platypus",
-      "email": "PerryP@test.com",
+      "email": "PerryP@malikaz.com",
       "is_staff": true,
       "password": "the-pass-word-01",
       "username": "PerryP",
@@ -63,7 +63,7 @@
     "fields": {
       "first_name": "Phineas",
       "last_name": "Flynn",
-      "email": "PhineasF@test.com",
+      "email": "PhineasF@malikaz.com",
       "password": "the-pass-word-01",
       "is_staff": true,
       "username": "PhineasF",
@@ -78,7 +78,7 @@
     "fields": {
       "first_name": "Ferb",
       "last_name": "Fletcher",
-      "email": "FerbF@test.com",
+      "email": "FerbF@malikaz.com",
       "password": "the-pass-word-01",
       "is_staff": true,
       "username": "FerbF",
@@ -94,7 +94,7 @@
       "first_name": "Heinz",
       "last_name": "Doofenshmirtz",
       "password": "the-pass-word-01",
-      "email": "HeinzD@test.com",
+      "email": "HeinzD@malikaz.com",
       "username": "HeinzD",
       "groups": [
         4
@@ -107,7 +107,7 @@
     "fields": {
       "first_name": "Candace",
       "last_name": "Fylnn",
-      "email": "CandiceF@test.com",
+      "email": "CandiceF@malikaz.com",
       "password": "the-pass-word-01",
       "username": "CandiceF",
       "groups": [
@@ -121,7 +121,7 @@
     "fields": {
       "first_name": "Baljeet",
       "last_name": "Tjinder",
-      "email": "BaljeetT@test.com",
+      "email": "BaljeetT@malikaz.com",
       "password": "the-pass-word-01",
       "username": "BaljeetT",
       "groups": [
